@@ -1,10 +1,14 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<title>Add Entry</title>
-	<meta name="description" content="This is a tool to check the most popular baby names." />
-	<meta name="keywords" content="baby names" />
+	<meta name="description" content="This is a course registration website. This is the page for admin CRUD operations." />
+	<meta name="keywords" content="courses, course, course registration, classes, register" />
 	<meta name="author" content="Devanshu Sheth" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -12,29 +16,41 @@
 
 		//$("#btnadd").hide();
 		$(document).ready(function () {
-
+            
+           
 			$("#result").hide();
-
-
-			$("#btnSubmit").click(function () {
+            
+            
+         
+			
+            $("#btnSubmit").click(function () {
 
 				$("#result").hide();
-				$("#btnSubmit").hide();
+				if($("#optionTables").val() != "None")
+                $("#btnSubmit").hide();
 				$(".div1").empty();
 				loadForm();
 
 			});
 
+            if($("#optionTables").val() != "None")
+            {
+                displayForm();
+            }
 
 			$("#optionTables").on("change", function () {
-				$("#btnSubmit").show();
-				displayForm();
+		
+        		$("#btnSubmit").show();
+        		displayForm();
 			});
 
+            
 			$(document).on('click', '.onUpdate', function () {
 				$(".div1").empty();
-				var closesttr = $(this).closest('tr');
-
+				if($("#optionTables").val() != "None")
+                $("#btnSubmit").hide();
+                var closesttr = $(this).closest('tr');
+               
 				//	$(".test").html(closesttr.attr('id'));
 
 				var idUpdate = closesttr.attr('id');
@@ -106,7 +122,7 @@
 								data: { tablechoice: $("#optionTables").val(), primarykeyValue1: primarykey1, primekey1: primekey1 },
 								dataType: "json",
 								success: function (data) {
-									$(".test").html(data['DeanId']);
+									//$(".test").html(data['DeanId']);
 									loadForm();
 									var tablestr = $('<input type="hidden"/>');
 									tablestr.attr('name', 'originalkey1');
@@ -790,6 +806,13 @@
 
 		.pageheader {
 			text-align: center;
+            
+
+		}
+
+        .pageheader a{
+			text-decoration: none;
+            color: white;
 
 		}
 
@@ -813,12 +836,13 @@
 
 <body>
 
-	<h2 class="pageheader">Course Registration</h2>
+
+	<h2 class="pageheader"><a href="Course.php">Course Registration</a></h2>
 	<p>
 		Table Name:
-		<select name="optionTables" id="optionTables">
-			<option selected>None</option>
-			<option>college</option>
+		<select name="optionTables" id="optionTables" >
+            <option selected value="<?php echo (isset($_SESSION['coltod'])) ? htmlspecialchars($_SESSION['coltod']) : 'None'; ?>" label="..."></option>
+            <option>college</option>
 			<option>collegephone</option>
 			<option>course</option>
 			<option>department</option>
@@ -856,3 +880,4 @@
 
 
 </html>
+

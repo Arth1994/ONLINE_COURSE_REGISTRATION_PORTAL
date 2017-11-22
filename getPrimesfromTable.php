@@ -5,11 +5,11 @@ session_start();
 	$password = "admin";
 	
 	$chosenTable = $_GET['tablechoice'];
-	//$chosenTable = "college";
+	//$chosenTable = "takes";
 	
 	$conn = mysqli_connect('localhost', 'root', 'root', 'courseregistration');
 	if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+   echo "Connection failed: " . mysqli_connect_error();
 	}
 	
 
@@ -18,27 +18,30 @@ session_start();
 	
 	
 	
-	
-	$result = mysqli_query($conn,"SELECT * FROM $chosenTable where Deleted ='N'");
+	$result = mysqli_query($conn,"SHOW KEYS FROM $chosenTable WHERE Key_name = 'PRIMARY'");
 	
 	while(	$userData = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		$data[] = $userData;
 	}
 	
-	//print_r ($data);
 	mysqli_close($conn);
+	
 	if($data)
 	{
 		echo json_encode($data);
 		
-	
 	}
+	
+	//echo json_encode($data);
+		
+	
+	
 
 	
 	
 	
-	
+
 	
 	
 	
