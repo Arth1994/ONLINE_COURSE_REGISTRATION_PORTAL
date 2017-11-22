@@ -32,7 +32,10 @@ $sql = "INSERT INTO `$tablename` ($columns) VALUES ($values)";
 	
 	if (mysqli_query($conn, $sql)) 
 	{
-    echo "New record created successfully";
+	echo "New record created successfully";
+	$_SESSION['coltod'] = $tablename;
+	header("Location: Course.php");
+	die();	
 	} 
 	else 
 	{

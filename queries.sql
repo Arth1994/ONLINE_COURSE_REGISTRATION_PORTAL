@@ -115,3 +115,18 @@ ALTER TABLE `logindetail` ADD CONSTRAINT `FK_SID_login` FOREIGN KEY (`SID`) REFE
 INSERT INTO `courseregistration`.`student` (`SID`, `DOB`, `SFname`, `SMname`, `SLname`, `Address`, `Major`, `DCode`, `DeleteStudent`) VALUES ('0', '', 'admin', '', 'admin', '', '', NULL, 'N');
 INSERT INTO `courseregistration`.`logindetail` (`SID`, `username`, `password`) VALUES ('0', 'admin', 'admin')
 
+ALTER TABLE `college` CHANGE `DeleteCollege` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+ALTER TABLE `collegephone` CHANGE `DeleteCollegePhone` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+ALTER TABLE `course` CHANGE `DeleteCourse` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+ALTER TABLE `department` CHANGE `DeleteDepartment` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+ALTER TABLE `deptphone` CHANGE `DeleteDeptPhone` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+ALTER TABLE `instrphone` CHANGE `DeleteInstrPhone` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+ALTER TABLE `instructor` CHANGE `DeleteInstructor` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'N';
+ALTER TABLE `logindetail` ADD `Deleted` CHAR(1) NULL DEFAULT 'N' AFTER `password`;
+ALTER TABLE `section` CHANGE `DeleteSection` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+ALTER TABLE `student` CHANGE `DeleteStudent` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+ALTER TABLE `studentphone` CHANGE `DeleteStudentPhone` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+ALTER TABLE `takes` CHANGE `DeleteTakes` `Deleted` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N';
+
+ALTER TABLE `takes` CHANGE `SecID` `SecID` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '' FIRST;
+ALTER TABLE `section` ADD `OpenClosed` CHAR(1) NULL DEFAULT 'N' AFTER `Sem`;
