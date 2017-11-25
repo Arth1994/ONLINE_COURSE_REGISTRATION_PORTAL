@@ -10,24 +10,60 @@
 	<script>
 	$(document).ready(function(){
 
+		$("#username").val('');
+		$("#password").val('');
+		
+		$("#username").after('<span id="id_username"></span>');
+		$("#password").after('<span id="id_password"></span>');
 
-		$("#submit").click(function(){
+		$("#id_username").hide();
+		$("#id_password").hide();
 
-			//alert("Hi");
-			var username 	= $("#username").val();
-    		var password 	= $("#password").val();
+		
+
+		
+	$("#username").blur(function () {
 			
-			var letters = /^[a-zA-Z0-9]+$/;
-			
-			if((username == "") || (password == "")) 
-			{
-					alert("Missing Fields");
+			var uname = $("#username").val();
+			if (uname == '') {
+			$("#id_username").show();	
+			$("#id_username").addClass("error");
+			$("#id_username").html("Cannot be empty");
 			}
-
+			else{
+				$("#id_username").hide();
+			}
+			
+			
 		});
+
+
+		$("#password").blur(function () {
+		var pwd = $("#password").val();
+		if (pwd == '') {
+			$("#id_password").show();
+			$("#id_password").addClass("error");
+			$("#id_password").html("Cannot be empty");
+		}
+		else{
+			$("#id_password").hide();
+		}
+		
+	});
+
 
 	});
 	</script>
+	<style>
+	 .error {
+	padding: 0px 2px;
+	background: #fcc;
+	border: 2px solid #c99;
+	}
+
+
+
+	</style>
 </head>
 <body>
 
