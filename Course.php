@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>Add Entry</title>
+	<title>Admin Page</title>
 	<meta name="description" content="This is a course registration website. This is the page for admin CRUD operations." />
 	<meta name="keywords" content="courses, course, course registration, classes, register" />
 	<meta name="author" content="Devanshu Sheth" />
@@ -19,10 +19,6 @@ session_start();
             
            
 			$("#result").hide();
-            
-            
-         
-			
             $("#btnSubmit").click(function () {
 
 				$("#result").hide();

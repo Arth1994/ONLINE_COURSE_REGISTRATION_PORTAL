@@ -51,7 +51,7 @@ session_start();
 		
 	
 	}
-	else if($chosenTable == "studentphone")
+	else if($chosenTable == "studentphone" || $chosenTable == "logindetail")
 	{
 		$result = mysqli_query($conn,"SELECT SID from student");
 	}
