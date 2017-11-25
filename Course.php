@@ -17,25 +17,29 @@ session_start();
 		//$("#btnadd").hide();
 		$(document).ready(function () {
             
-           
+			$("#btnSubmit").hide();
 			$("#result").hide();
             $("#btnSubmit").click(function () {
 
 				$("#result").hide();
 				if($("#optionTables").val() != "None")
-                $("#btnSubmit").hide();
+				{
+				$("#btnSubmit").hide();
+				}
 				$(".div1").empty();
 				loadForm();
 
 			});
 
-            if($("#optionTables").val() != "None")
+            
+			if($("#optionTables").val() != "None")
             {
+				$("#btnSubmit").show();
                 displayForm();
             }
 
 			$("#optionTables").on("change", function () {
-		
+				
         		$("#btnSubmit").show();
         		displayForm();
 			});
@@ -641,6 +645,53 @@ session_start();
 
 								});
 							}
+							else if (tablechoice == "logindetail" && rows[i] == "user_type")
+							{
+							
+								var selectstr = $('<select>');
+										$form.append("<p>" + "User_type" + " : ");
+										$form.append(selectstr);
+
+										selectstr.attr('name', "user_type");
+
+										$(selectstr).append('<option>admin</option><option>user</option>')
+										$form.append('</select></p>');
+							}
+
+							else if (tablechoice == "logindetail" && rows[i] == "SID")
+							{
+								$.ajax({
+									async: false,
+									type: "GET",
+									url: "handleDropdown.php",
+									data: { tablechoice: "logindetail", columnchoice: "SID" },
+									dataType: "json",
+									success: function (datarows) {
+
+
+										var selectstr = $('<select>');
+										$form.append("<p>" + "SID" + " : ");
+										$form.append(selectstr);
+
+										selectstr.attr('name', "SID");
+
+										for (var i in datarows) {
+											var datarow = datarows[i];
+
+											var coldata = datarow['SID'];
+											if (datarow['SID']) {
+												$(selectstr).append('<option>' + datarow['SID'] + '</option>');
+											}
+
+
+										}
+										$form.append('</select></p>');
+
+									}
+
+								});
+
+							}
 							else if (rows[i] == "Deleted") {
 								var selectstr = $('<select>');
 								$form.append("<p>" + colname + " : ");
@@ -654,6 +705,7 @@ session_start();
 							}
 							else if ((tablechoice == "section" && rows[i] == "CoCode") || (tablechoice == "takes" && rows[i] == "SID") || (tablechoice == "department" && rows[i] == "CName")) {
 							}
+
 
 
 							else {
