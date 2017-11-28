@@ -4,7 +4,7 @@ class User{
     private $dbHost     = "localhost";
     private $dbUsername = "root";
     private $dbPassword = "root";
-    private $dbName     = "dbtest";
+    private $dbName     = "courseregistration";
     private $userTbl    = "users";
     
     public function __construct(){
