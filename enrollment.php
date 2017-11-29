@@ -62,7 +62,8 @@ session_start()
                     dataType : "json",
                     success: function (result) {
                         $('#department').empty();
-                        $('#courses').empty();
+                        $('#course').empty();
+                        $('#section').empty();
                         for (var key in result){
                             $('#department').append(result[key]);
                         }
@@ -78,51 +79,92 @@ session_start()
                     data: {department: department}, 
                     dataType : "json",
                     success: function (result) {
-                        $('#courses').empty();
+                        $('#course').empty();
+                        $('#section').empty();
                         for (var key in result){
-                            $('#courses').append(result[key]);
+                            $('#course').append(result[key]);
                         }
                     }
                 })
             });
+            $(document).on("change", '#course', function(e){
+                var course = $('#course').val();
+                $.ajax({
+                    url: 'getSections.php',
+                    type: 'POST',
+                    data: {course: course}, 
+                    dataType : "json",
+                    success: function (result) {
+                        $('#section').empty();
+                        for (var key in result){
+                            $('#section').append(result[key]);
+                        }
+                    }
+                })
+            });
+            // $(document).on("click", '#submit', function(e){
+            //     var college = $('#college').val();
+            //     var department = $('#department').val();
+            //     var course = $('#course').val();
+            //     var section = $('#section').val();
+            //     var id = $_SESSION['id'];
+            //     $.ajax({
+            //         url: 'getSections.php',
+            //         type: 'POST',
+            //         data: {college: college, department: department, course: course, section: section, id:id}, 
+            //         dataType : "json",
+            //         success: function (result) {
+            //             $('#section').empty();
+            //             for (var key in result){
+            //                 $('#section').append(result[key]);
+            //             }
+            //         }
+            //     })
+            // });
         });
     </script>
 </head>
 
 <body>
 
-    <br>
-    <!-- <form id='class' method='post'>
-       
-        <input type="submit" />
-    </form>
-     -->
-    <select name="college" form="class" id="college">
-        <option value = ""></option>
-        <?php
-            $con = mysqli_connect('localhost', 'root', 'root', 'courseregistration');
-            $query = "SELECT DISTINCT CName FROM college";
-            $result = mysqli_query($con, $query);
-            while($row = mysqli_fetch_assoc($result)){
-                // echo "<option value=\"college1\">" . $row['CName'] . "</option>";
-                echo "<option value ='" . $row['CName'] . "'>" . $row['CName'] . "</option>";
-            }
-            mysqli_close($con);
-        ?>
+    <form method='post' id='class' action="addToCart.php">
+        <select name="college" form="class" id="college">
+            <option value = ""></option>
+            <?php
+                $con = mysqli_connect('localhost', 'root', 'root', 'courseregistration');
+                $query = "SELECT DISTINCT CName FROM college";
+                $result = mysqli_query($con, $query);
+                while($row = mysqli_fetch_assoc($result)){
+                    echo "<option value ='" . $row['CName'] . "'>" . $row['CName'] . "</option>";
+                }
+                mysqli_close($con);
+            ?>
         </select>
-    <select name="department" form="class" id="department">
-        <option value = ""></option>
-    </select>
-    <select name="courses" form="class" id="courses">
-        <option value = ""></option>
-    </select>
-    <select name="section" form="class" id="section">
-        <option value = ""></option>
-    </select>
+        <br>
+        <br>
+        <select name="department" form="class" id="department">
+            <option value = ""></option>
+        </select>
+        <br>
+        <br>
+        <select name="course" form="class" id="course">
+            <option value = ""></option>
+        </select>
+        <br>
+        <br>
+        <select name="section" form="class" id="section">
+            <option value = ""></option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="Add to cart" id="submit"/>
+        <br>
+        <br>
+    </form>
+    
+    
 
-    <div id="output">
-        <p id="test"></p>
-    </div>
+
 </body>
 
 </html>
