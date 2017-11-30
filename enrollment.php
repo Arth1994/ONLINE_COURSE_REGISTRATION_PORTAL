@@ -11,6 +11,27 @@ session_start()
 
     <script>
         $(document).ready(function(){
+            $('#results').hide();
+            $(document).on("change", '#college', function(e){
+                var college = $('#college').val();
+                $.ajax({
+                    url: 'getCourseTableEntries.php',
+                    type: 'POST',
+                    data: {college: college}, 
+                    dataType : "json",
+                    success: function (result) {
+                        $('#results').empty();
+                        // $('#department').empty();
+                        // $('#course').empty();
+                        // $('#section').empty();
+                        for (var key in result){
+                            $('#results').append(result[key]);
+                        }
+                        $('#results').show();
+                    }
+                }).done(function(){
+                })
+            });
             $(document).on("change", '#college', function(e){
                 var college = $('#college').val();
                 $.ajax({
@@ -43,6 +64,27 @@ session_start()
                             $('#course').append(result[key]);
                         }
                     }
+                })
+            });
+            $(document).on("change", '#department', function(e){
+                var college = $('#college').val();
+                var department = $('#department').val();
+                $.ajax({
+                    url: 'getCourseTableEntries.php',
+                    type: 'POST',
+                    data: {college: college, department: department}, 
+                    dataType : "json",
+                    success: function (result) {
+                        $('#results').empty();
+                        // $('#department').empty();
+                        // $('#course').empty();
+                        // $('#section').empty();
+                        for (var key in result){
+                            $('#results').append(result[key]);
+                        }
+                        $('#results').show();
+                    }
+                }).done(function(){
                 })
             });
             $(document).on("change", '#course', function(e){
@@ -101,7 +143,17 @@ session_start()
         <br>
     </form>
     
-    <form method='post' id='class' action="addToCart.php">
+    <table id='results'>
+            <!-- <tr>
+                <th>Department</th>
+                <th>Course Number</th> 
+                <th>Course Name</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Section Number</th>
+            </tr> -->
+    </table>
+    <!-- <form method='post' id='class' action="addToCart.php">
         <table id='results'>
             <tr>
                 <th>Department</th>
@@ -111,9 +163,8 @@ session_start()
                 <th>Time</th>
                 <th>Section Number</th>
             </tr>
-            
         </table>
-    </form>
+    </form> -->
 </body>
 
 </html>
