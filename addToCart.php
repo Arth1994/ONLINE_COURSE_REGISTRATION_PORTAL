@@ -31,26 +31,20 @@
 
     if($sectionLimit - 1 <= 0){
         // section is full, reroute to search
+        header("Location: enrollment.php");
     }
     else{
         // add to cart table
+        $query = "INSERT INTO cart (SecId, SID, Deleted) VALUES (". $sectionCode .
+                    ", " . $id . ", 'N' )";
+        mysqli_query($con, $query);  
+        $query = "UPDATE section SET SectionLimit =" . $sectionLimit - 1 . 
+                    "WHERE SecId='" . $sectionCode . "'";
+        mysqli_query($con, $query);
+        header("Location: cart.php");
     }
 
     // route to view cart page
     mysqli_close($con);
-    
-    // $result = mysqli_query($con, $query);
-    // if (!mysqli_query($con, $query)){
-    //     echo("Error description: " . mysqli_error($con));
-    // }
-    // $response = array();
-    // $response[0] = '<option value = ""></option>';
-    // $count = 1;
-    // while($row = mysqli_fetch_assoc($result)){
-    //     $response[$count] = "<option value ='" . $row['SecNo'] . "'>" . $row['SecNo'] . "</option>";
-    //     $count++;
-    // }
-    // echo json_encode($response);
-    // mysqli_close($con);
     
 ?>

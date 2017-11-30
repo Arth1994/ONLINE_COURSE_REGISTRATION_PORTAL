@@ -67,53 +67,25 @@ session_start()
 <body>
 
     <form method='post' id='class' action="addToCart.php">
-        <select name="college" form="class" id="college">
-            <option value = ""></option>
-            <?php
-                $con = mysqli_connect('localhost', 'root', 'root', 'courseregistration');
-                $query = "SELECT DISTINCT CName FROM college";
-                $result = mysqli_query($con, $query);
-                while($row = mysqli_fetch_assoc($result)){
-                    echo "<option value ='" . $row['CName'] . "'>" . $row['CName'] . "</option>";
-                }
-                mysqli_close($con);
-            ?>
-        </select>
-        <br>
-        <br>
-        <select name="department" form="class" id="department">
-            <option value = ""></option>
-        </select>
-        <br>
-        <br>
-        <select name="course" form="class" id="course">
-            <option value = ""></option>
-        </select>
-        <br>
-        <br>
-        <select name="section" form="class" id="section">
-            <option value = ""></option>
-        </select>
-        <br>
-        <br>
-        <input type="submit" value="Add to cart" id="submit"/>
-        <br>
-        <br>
-    </form>
-    
-    <form method='post' id='class' action="addToCart.php">
-        <table id='results'>
+        <table style="width:100%">
             <tr>
-                <th>Department</th>
-                <th>Course Number</th> 
-                <th>Course Name</th>
-                <th>Day</th>
-                <th>Time</th>
-                <th>Section Number</th>
+                <th>Firstname</th>
+                <th>Lastname</th> 
+                <th>Age</th>
             </tr>
-            
+            <tr>
+                <td>Jill</td>
+                <td>Smith</td> 
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Eve</td>
+                <td>Jackson</td> 
+                <td>94</td>
+            </tr>
         </table>
     </form>
+    
 </body>
 
 </html>
