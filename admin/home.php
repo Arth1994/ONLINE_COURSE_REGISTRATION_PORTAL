@@ -52,6 +52,8 @@
 						<a href="home.php?logout='1'" style="color: red;">logout</a>
 						&nbsp; <a href="create_user.php"> + add user</a>
 						<br/>
+						<a href="../enrollment.php">Enrollment Module</a>
+						<br/>
 						<a href="../Course.php">Admin Module</a>
 					</small>
 					
