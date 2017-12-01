@@ -12,31 +12,31 @@
     $con = mysqli_connect('localhost', 'root', 'root', 'courseregistration');
 
     if (isset($college) and !isset($department) and !isset($course) and !isset($section)){
-        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE department.CName ='" . $college . "'";
+        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo, section.SecId FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE department.CName ='" . $college . "'";
         
         $result = mysqli_query($con, $query);
         $response = array();
-        $response[] = "<tr><th>Department</th><th>Course Number</th><th>Course Name</th><th>Time</th><th>Section Number</th></tr>";
+        $response[] = "<tr><th>Department</th><th>Course Number</th><th>Course Name</th><th>Time</th><th>Section Number</th><th>Add To Cart</th></tr>";
         while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
-            $response[] = "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td></tr>";
+            $response[] = "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td><td><button class='add' id ='". $row[5] ."'>Add</button></td></tr>";
         }
     } elseif (isset($college) and isset($department) and !isset($course) and !isset($section)) {
         $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE department.CName ='" . $college . "' AND department.DName='" . $department . "'";
         
         $result = mysqli_query($con, $query);
         $response = array();
-        $response[] = "<tr><th>Department</th><th>Course Number</th><th>Course Name</th><th>Time</th><th>Section Number</th></tr>";
+        $response[] = "<tr><th>Department</th><th>Course Number</th><th>Course Name</th><th>Time</th><th>Section Number</th><th>Add To Cart</th></tr>";
         while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
-            $response[] = "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td></tr>";
+            $response[] = "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td><td><button class='add'>Add</button></td></tr>";
         }
     } elseif (isset($college) and isset($department) and !isset($course) and !isset($section)) {
         $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE department.CName ='" . $college . "' AND department.DName='" . $department . "'";
         
         $result = mysqli_query($con, $query);
         $response = array();
-        $response[] = "<tr><th>Department</th><th>Course Number</th><th>Course Name</th><th>Time</th><th>Section Number</th></tr>";
+        $response[] = "<tr><th>Department</th><th>Course Number</th><th>Course Name</th><th>Time</th><th>Section Number</th><th>Add To Cart</th></tr>";
         while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
-            $response[] = "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td></tr>";
+            $response[] = "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td><td><button class='add'>Add</button></td></tr>";
         }
     }
 

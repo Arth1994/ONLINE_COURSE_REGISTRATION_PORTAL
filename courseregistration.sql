@@ -8,7 +8,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 CREATE DATABASE IF NOT EXISTS `courseregistration` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `courseregistration`;
 
-DROP TABLE IF EXISTS `college`;
 CREATE TABLE IF NOT EXISTS `college` (
   `CName` varchar(20) NOT NULL,
   `COffice` varchar(20) NOT NULL,
@@ -19,12 +18,8 @@ CREATE TABLE IF NOT EXISTS `college` (
 INSERT INTO `college` (`CName`, `COffice`, `DeanId`, `Deleted`) VALUES
 ('ATEC', '25', '1002', 'N'),
 ('ECS', '21', '1003', 'N'),
-('FO', 'F1.101', '1002', 'Y'),
-('JSOM', '22', '1002', 'N'),
-('MATH', 'M19.11', '1001', 'N'),
-('PHY', '24', '1004', 'N');
+('JSOM', '22', '1002', 'N');
 
-DROP TABLE IF EXISTS `collegephone`;
 CREATE TABLE IF NOT EXISTS `collegephone` (
   `CName` varchar(20) NOT NULL DEFAULT '',
   `CPhone` varchar(20) NOT NULL DEFAULT '',
@@ -38,7 +33,6 @@ INSERT INTO `collegephone` (`CName`, `CPhone`, `Deleted`) VALUES
 ('JSOM', '12345', 'N'),
 ('JSOM', '222', 'N');
 
-DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
   `CoCode` int(5) NOT NULL DEFAULT '0',
   `CoName` varchar(20) DEFAULT NULL,
@@ -56,7 +50,6 @@ INSERT INTO `course` (`CoCode`, `CoName`, `Credits`, `Level`, `CoDescription`, `
 (4, 'BI', 3, '6000', 'BUSINESS INTELLIGENCE', 11, 'N'),
 (5, 'HM', 3, '6000', 'HUMANITIES', 12, 'N');
 
-DROP TABLE IF EXISTS `department`;
 CREATE TABLE IF NOT EXISTS `department` (
   `DCode` int(5) NOT NULL DEFAULT '0',
   `DName` varchar(20) DEFAULT NULL,
@@ -71,7 +64,6 @@ INSERT INTO `department` (`DCode`, `DName`, `DOffice`, `DeptChairID`, `CName`, `
 (11, 'ITM', '111', '1002', 'JSOM', 'N'),
 (12, 'ARTS', '112', '1003', 'ATEC', 'N');
 
-DROP TABLE IF EXISTS `deptphone`;
 CREATE TABLE IF NOT EXISTS `deptphone` (
   `DCode` int(5) NOT NULL DEFAULT '0',
   `DeptPhone` varchar(20) NOT NULL DEFAULT '',
@@ -84,7 +76,6 @@ INSERT INTO `deptphone` (`DCode`, `DeptPhone`, `Deleted`) VALUES
 (12, '3333333333', 'N'),
 (12, '4444444444', 'N');
 
-DROP TABLE IF EXISTS `instrphone`;
 CREATE TABLE IF NOT EXISTS `instrphone` (
   `ID` varchar(20) NOT NULL DEFAULT '',
   `IPhone` varchar(20) NOT NULL DEFAULT '',
@@ -98,7 +89,6 @@ INSERT INTO `instrphone` (`ID`, `IPhone`, `Deleted`) VALUES
 ('1004', '8888888888', 'N'),
 ('1005', '4444444444', 'N');
 
-DROP TABLE IF EXISTS `instructor`;
 CREATE TABLE IF NOT EXISTS `instructor` (
   `ID` varchar(20) NOT NULL DEFAULT '',
   `Rank` varchar(20) NOT NULL,
@@ -115,12 +105,13 @@ INSERT INTO `instructor` (`ID`, `Rank`, `IName`, `IOffice`, `DCode`, `Deleted`) 
 ('1004', '0004', 'CATYLYN JOSEPH', '203', 11, 'N'),
 ('1005', '0005', 'JONAH', '204', 12, 'N');
 
-DROP TABLE IF EXISTS `logindetail`;
 CREATE TABLE IF NOT EXISTS `logindetail` (
-  `username` varchar(30) NOT NULL,
-  `SID` varchar(20) NOT NULL,
-  `password` varchar(30) NOT NULL,
-  `Deleted` char(1) DEFAULT 'N'
+  `username` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `user_type` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `SID` varchar(20) DEFAULT NULL,
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `logindetail` (`username`, `email`, `user_type`, `password`, `SID`, `Deleted`) VALUES
@@ -131,7 +122,6 @@ INSERT INTO `logindetail` (`username`, `email`, `user_type`, `password`, `SID`, 
 ('dmfl', 'kmlf@mkflgq', 'admin', '1084c29da0ccd38cfcf3d9c92c148026', '2', 'N'),
 ('dmk', 'MK@MDL', 'user', '1084c29da0ccd38cfcf3d9c92c148026', '4', 'N');
 
-DROP TABLE IF EXISTS `section`;
 CREATE TABLE IF NOT EXISTS `section` (
   `SecId` varchar(20) NOT NULL DEFAULT '',
   `SecNo` varchar(3) DEFAULT NULL,
@@ -155,7 +145,6 @@ INSERT INTO `section` (`SecId`, `SecNo`, `Sem`, `OpenClosed`, `Year`, `RoomNo`, 
 ('2003', '853', 2, 'N', 2017, '403', 'JSOM2', '11:00-12:15', '1004', 4, 100, 100, 'N'),
 ('2004', '854', 2, 'N', 2018, '404', 'ATEC', '10:00-11:15', '1005', 5, 60, 60, 'N');
 
-DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
   `SID` varchar(20) NOT NULL DEFAULT '',
   `DOB` date NOT NULL,
@@ -176,7 +165,6 @@ INSERT INTO `student` (`SID`, `DOB`, `SFname`, `SMname`, `SLname`, `Address`, `M
 ('4', '2017-10-04', 'EDEN', 'BHAVESH', 'HAZARD', '1011 COIT ROAD', 'MIS', 11, 'N'),
 ('5', '2017-10-05', 'JAMIE', 'KUMAR', 'VARDY', '1011 PRESTON ROAD', 'ARTS', 12, 'N');
 
-DROP TABLE IF EXISTS `studentphone`;
 CREATE TABLE IF NOT EXISTS `studentphone` (
   `SID` varchar(20) NOT NULL DEFAULT '',
   `SPhone` varchar(20) NOT NULL DEFAULT '',
@@ -190,7 +178,6 @@ INSERT INTO `studentphone` (`SID`, `SPhone`, `Deleted`) VALUES
 ('4', '4444555555', 'N'),
 ('5', '5555666666', 'N');
 
-DROP TABLE IF EXISTS `takes`;
 CREATE TABLE IF NOT EXISTS `takes` (
   `SID` varchar(20) NOT NULL DEFAULT '',
   `SecID` varchar(20) NOT NULL DEFAULT '',
@@ -235,7 +222,8 @@ ALTER TABLE `instructor`
 
 ALTER TABLE `logindetail`
   ADD PRIMARY KEY (`username`),
-  ADD KEY `SID` (`SID`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `FK_SID_login` (`SID`);
 
 ALTER TABLE `section`
   ADD PRIMARY KEY (`SecId`),

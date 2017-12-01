@@ -1,5 +1,5 @@
 <?php
-session_start()
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -99,6 +99,24 @@ session_start()
                         for (var key in result){
                             $('#section').append(result[key]);
                         }
+                    }
+                })
+            });
+            $(document).on("click", '.add', function(e){
+                var sectionID = $(this).attr('id');
+                var userID = <?php echo $_SESSION['user']['SID']; ?>; 
+                $.ajax({
+                    async: false,
+                    url: 'addToCart.php',
+                    type: 'POST',
+                    data: {sectionID: sectionID, userID: userID},
+                    success: function (result){
+                        if (result != "Added"){
+                            alert(result);
+                        }
+                    },
+                    error: function(e){
+                        alert(e.responseText);
                     }
                 })
             });
@@ -209,18 +227,6 @@ session_start()
                 <th>Section Number</th>
             </tr> -->
     </table>
-    <!-- <form method='post' id='class' action="addToCart.php">
-        <table id='results'>
-            <tr>
-                <th>Department</th>
-                <th>Course Number</th> 
-                <th>Course Name</th>
-                <th>Day</th>
-                <th>Time</th>
-                <th>Section Number</th>
-            </tr>
-        </table>
-    </form> -->
 </body>
 
 </html>
