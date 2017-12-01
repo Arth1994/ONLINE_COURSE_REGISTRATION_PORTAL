@@ -104,6 +104,62 @@ session_start()
             });
         });
     </script>
+    	<style>
+		body {
+			background-color: black;
+			font-family: Georgia, 'Times New Roman', Times, serif;
+			color: white;
+		}
+		select {
+			background-color: white;
+		}
+		button {
+			background-color: white;
+			text-align: center;
+			font-size: 15px;
+		}
+		table,
+		td,
+		th {
+			border: 1px solid #ddd;
+			text-align: left;
+		}
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		.pageheader {
+			text-align: center;
+            
+		}
+        .pageheader a{
+			text-decoration: none;
+            color: white;
+		}
+		th,
+		td {
+			padding: 15px;
+		}
+		tr:hover {
+			background-color: #f5f5f580;
+			color: black;
+		}
+		td:hover {
+			background-color: #ddda2393;
+			color: black;
+		}
+		.btncancel {
+  font: 15px Arial;
+  text-decoration: none;
+  background-color: white;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+	</style>
 </head>
 
 <body>
