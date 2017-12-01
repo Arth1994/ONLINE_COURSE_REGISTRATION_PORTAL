@@ -30,6 +30,7 @@ INSERT INTO `collegephone` (`CName`, `CPhone`, `Deleted`) VALUES
 ('ATEC', '2234561875', 'N'),
 ('ATEC', '4656498741', 'N'),
 ('ECS', '221', 'N'),
+('JSOM', '12345', 'N'),
 ('JSOM', '222', 'N');
 
 CREATE TABLE IF NOT EXISTS `course` (
@@ -43,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `course` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `course` (`CoCode`, `CoName`, `Credits`, `Level`, `CoDescription`, `CoDCode`, `Deleted`) VALUES
-(1, 'AI', 3, '6389', 'ARTIFICIAL INTELLIGENCE ', 12, 'N'),
+(1, 'AI', 3, '6389', 'ARTIFICIAL INTELLIGENCE ', 10, 'N'),
 (2, 'DB', 3, '6360', 'DATABASE DESIGN', 10, 'N'),
 (3, 'DM', 3, '6000', 'DATA MINING', 11, 'N'),
 (4, 'BI', 3, '6000', 'BUSINESS INTELLIGENCE', 11, 'N'),
@@ -116,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `logindetail` (
 INSERT INTO `logindetail` (`username`, `email`, `user_type`, `password`, `SID`, `Deleted`) VALUES
 ('admin', 'arthshah46@gmail.com', 'admin', 'c93ccd78b2076528346216b3b2f701e6', '0', 'N'),
 ('arth', 'axs175430@utdallas.edu', 'user', 'e10adc3949ba59abbe56e057f20f883e', '1', 'N'),
+('devanshu', 'ddfg@jifg', 'user', '1084c29da0ccd38cfcf3d9c92c148026', '5', 'N'),
 ('devanshudsheth', 'devanshudsheth@gmail.com', 'user', '9fe2f8334ff8eeb370462561e37c6826', '3', 'N'),
 ('dmfl', 'kmlf@mkflgq', 'admin', '1084c29da0ccd38cfcf3d9c92c148026', '2', 'N'),
 ('dmk', 'MK@MDL', 'user', '1084c29da0ccd38cfcf3d9c92c148026', '4', 'N');
@@ -132,15 +134,16 @@ CREATE TABLE IF NOT EXISTS `section` (
   `InstructorID` varchar(20) DEFAULT NULL,
   `CoCode` int(5) DEFAULT NULL,
   `SectionLimit` int(3) DEFAULT NULL,
+  `MaxCapacity` int(3) NOT NULL,
   `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `section` (`SecId`, `SecNo`, `Sem`, `OpenClosed`, `Year`, `RoomNo`, `Building`, `DaysTime`, `InstructorID`, `CoCode`, `SectionLimit`, `Deleted`) VALUES
-('2000', '850', 1, 'N', 2017, '400', 'ECSS', '1:00-2:15', '1001', 1, 50, 'N'),
-('2001', '851', 1, 'N', 2017, '401', 'ECSN', '11:00-12:15', '1002', 1, 100, 'N'),
-('2002', '852', 2, 'N', 2018, '402', 'JSOM1', '1:00-2:15', '1003', 3, 22, 'N'),
-('2003', '853', 2, 'N', 2017, '403', 'JSOM2', '11:00-12:15', '1004', 4, 100, 'N'),
-('2004', '854', 2, 'N', 2018, '404', 'ATEC', '10:00-11:15', '1005', 5, 60, 'N');
+INSERT INTO `section` (`SecId`, `SecNo`, `Sem`, `OpenClosed`, `Year`, `RoomNo`, `Building`, `DaysTime`, `InstructorID`, `CoCode`, `SectionLimit`, `MaxCapacity`, `Deleted`) VALUES
+('2000', '850', 1, 'N', 2017, '400', 'ECSS', '1:00-2:15', '1001', 1, 50, 50, 'N'),
+('2001', '851', 1, 'N', 2017, '401', 'ECSN', '11:00-12:15', '1002', 1, 100, 100, 'N'),
+('2002', '852', 2, 'Y', 2018, '402', 'JSOM1', '1:00-2:15', '1003', 3, 22, 22, 'N'),
+('2003', '853', 2, 'N', 2017, '403', 'JSOM2', '11:00-12:15', '1004', 4, 100, 100, 'N'),
+('2004', '854', 2, 'N', 2018, '404', 'ATEC', '10:00-11:15', '1005', 5, 60, 60, 'N');
 
 CREATE TABLE IF NOT EXISTS `student` (
   `SID` varchar(20) NOT NULL DEFAULT '',
