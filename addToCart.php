@@ -5,10 +5,9 @@
     $department = $_POST['department'];
     $college = $_POST['college'];
     $section = $_POST['section'];
-    $id = $_POST['id'];
+    $id = $_SESSION['user'];
 
    
-    
     $con = mysqli_connect('localhost', 'root', 'root', 'courseregistration');
     $query = "SELECT DCode FROM department WHERE CName='" . $college . "'";
     $result = mysqli_query($con, $query);
