@@ -22,28 +22,34 @@
     // $query = "SELECT SecId, SectionLimit FROM section WHERE CoCode='" . $courseCode . "'" . "AND SecNo='" .
     //             $section . "'";
 
-    $sectionID = $_REQUEST['sectionID'];
-    $userID = $_REQUEST['userID'];
+   $sectionID = $_REQUEST['sectionID'];
+   $userID = $_REQUEST['userID'];
+
 
     $query = "SELECT SectionLimit FROM section WHERE SecId = '$sectionID'";
     $result = mysqli_query($con, $query);
     $sectionLimit = mysqli_fetch_assoc($result)['SectionLimit'];
 
-    if($sectionLimit - 1 <= 0){
+    print_r($sectionLimit);
+    if($sectionLimit - 1 < 0){
         // section is full, reroute to search
-        header("Location: enrollment.php");
+       echo "Section is Full";
     }
     else{
         // add to cart table
         $query = "INSERT INTO cart (SecId, SID, Deleted) VALUES ('$sectionID', '$userID', 'N' )";
-        mysqli_query($con, $query);  
-        $sectionLimit = $sectionLimit - 1; 
-        $query = "UPDATE section SET SectionLimit='". $sectionLimit . "WHERE SecId='$sectionID'";
-        if (mysqli_query($con, $query)){
+        if(mysqli_query($con, $query))
+        {
+            $sectionLimit = $sectionLimit - 1; 
+         
+            $query = "UPDATE section SET SectionLimit= $sectionLimit WHERE SecId='$sectionID'";
+            mysqli_query($con, $query);
             echo "Added";
-        } else {
-            echo $query . "<br>" . mysqli_error($con);
-        }
+        }  
+       else{
+        echo $query . "<br>" . mysqli_error($con);
+       }
+      
         //header("Location: enrollment.php");
     }
 
