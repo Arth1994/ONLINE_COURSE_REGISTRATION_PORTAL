@@ -1,32 +1,34 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 CREATE DATABASE IF NOT EXISTS `courseregistration` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `courseregistration`;
 
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE IF NOT EXISTS `cart` (
-  `SecId` varchar(11) NOT NULL,
   `SID` varchar(11) NOT NULL,
-  `Deleted` char(1) NOT NULL,
-  PRIMARY KEY (`SecId`,`SID`),
-  KEY `SID_FK` (`SID`)
+  `SecId` varchar(11) NOT NULL,
+  `Deleted` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `cart` (`SecId`, `SID`, `Deleted`) VALUES
-('2002', '0', 'N'),
-('2004', '0', 'N');
+INSERT INTO `cart` (`SID`, `SecId`, `Deleted`) VALUES
+('0', '2003', 'N'),
+('1', '2004', 'N');
 
 DROP TABLE IF EXISTS `college`;
 CREATE TABLE IF NOT EXISTS `college` (
   `CName` varchar(20) NOT NULL,
   `COffice` varchar(20) NOT NULL,
   `DeanId` varchar(20) DEFAULT NULL,
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`CName`),
-  KEY `DeanId` (`DeanId`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `college` (`CName`, `COffice`, `DeanId`, `Deleted`) VALUES
-('ATEC', '25', '1002', 'N'),
+('ATEC', '25', '1001', 'N'),
 ('ECS', '21', '1003', 'N'),
 ('JSOM', '22', '1002', 'N');
 
@@ -34,8 +36,7 @@ DROP TABLE IF EXISTS `collegephone`;
 CREATE TABLE IF NOT EXISTS `collegephone` (
   `CName` varchar(20) NOT NULL DEFAULT '',
   `CPhone` varchar(20) NOT NULL DEFAULT '',
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`CName`,`CPhone`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `collegephone` (`CName`, `CPhone`, `Deleted`) VALUES
@@ -53,15 +54,13 @@ CREATE TABLE IF NOT EXISTS `course` (
   `Level` varchar(20) NOT NULL,
   `CoDescription` varchar(30) NOT NULL,
   `CoDCode` int(5) DEFAULT NULL,
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`CoCode`),
-  KEY `CoDCode` (`CoDCode`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `course` (`CoCode`, `CoName`, `Credits`, `Level`, `CoDescription`, `CoDCode`, `Deleted`) VALUES
 (1, 'AI', 3, '6389', 'ARTIFICIAL INTELLIGENCE ', 10, 'N'),
 (2, 'DB', 3, '6360', 'DATABASE DESIGN', 10, 'N'),
-(3, 'DM', 3, '6000', 'DATA MINING', 11, 'N'),
+(3, 'DM', 3, '6000', 'DATA MINING', 10, 'N'),
 (4, 'BI', 3, '6000', 'BUSINESS INTELLIGENCE', 11, 'N'),
 (5, 'HM', 3, '6000', 'HUMANITIES', 12, 'N');
 
@@ -72,11 +71,7 @@ CREATE TABLE IF NOT EXISTS `department` (
   `DOffice` varchar(20) NOT NULL,
   `DeptChairID` varchar(20) DEFAULT NULL,
   `CName` varchar(20) DEFAULT NULL,
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`DCode`),
-  UNIQUE KEY `DName` (`DName`),
-  KEY `DeptChairID` (`DeptChairID`,`CName`),
-  KEY `FK_CName` (`CName`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `department` (`DCode`, `DName`, `DOffice`, `DeptChairID`, `CName`, `Deleted`) VALUES
@@ -88,8 +83,7 @@ DROP TABLE IF EXISTS `deptphone`;
 CREATE TABLE IF NOT EXISTS `deptphone` (
   `DCode` int(5) NOT NULL DEFAULT '0',
   `DeptPhone` varchar(20) NOT NULL DEFAULT '',
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`DCode`,`DeptPhone`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `deptphone` (`DCode`, `DeptPhone`, `Deleted`) VALUES
@@ -102,8 +96,7 @@ DROP TABLE IF EXISTS `instrphone`;
 CREATE TABLE IF NOT EXISTS `instrphone` (
   `ID` varchar(20) NOT NULL DEFAULT '',
   `IPhone` varchar(20) NOT NULL DEFAULT '',
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`ID`,`IPhone`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `instrphone` (`ID`, `IPhone`, `Deleted`) VALUES
@@ -120,9 +113,7 @@ CREATE TABLE IF NOT EXISTS `instructor` (
   `IName` varchar(20) DEFAULT NULL,
   `IOffice` varchar(20) NOT NULL,
   `DCode` int(5) DEFAULT NULL,
-  `Deleted` char(1) DEFAULT 'N',
-  PRIMARY KEY (`ID`),
-  KEY `DCode` (`DCode`)
+  `Deleted` char(1) DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `instructor` (`ID`, `Rank`, `IName`, `IOffice`, `DCode`, `Deleted`) VALUES
@@ -139,10 +130,7 @@ CREATE TABLE IF NOT EXISTS `logindetail` (
   `user_type` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `SID` varchar(20) DEFAULT NULL,
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`username`),
-  UNIQUE KEY `email` (`email`),
-  KEY `FK_SID_login` (`SID`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `logindetail` (`username`, `email`, `user_type`, `password`, `SID`, `Deleted`) VALUES
@@ -167,10 +155,7 @@ CREATE TABLE IF NOT EXISTS `section` (
   `CoCode` int(5) DEFAULT NULL,
   `SectionLimit` int(3) DEFAULT NULL,
   `MaxCapacity` int(3) NOT NULL,
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`SecId`),
-  KEY `InstructorID` (`InstructorID`,`CoCode`),
-  KEY `FK_CoCode` (`CoCode`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `section` (`SecId`, `SecNo`, `Sem`, `OpenClosed`, `Year`, `RoomNo`, `Building`, `DaysTime`, `InstructorID`, `CoCode`, `SectionLimit`, `MaxCapacity`, `Deleted`) VALUES
@@ -190,9 +175,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `Address` varchar(30) NOT NULL,
   `Major` varchar(20) DEFAULT NULL,
   `DCode` int(5) DEFAULT NULL,
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`SID`),
-  KEY `DCode` (`DCode`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `student` (`SID`, `DOB`, `SFname`, `SMname`, `SLname`, `Address`, `Major`, `DCode`, `Deleted`) VALUES
@@ -207,8 +190,7 @@ DROP TABLE IF EXISTS `studentphone`;
 CREATE TABLE IF NOT EXISTS `studentphone` (
   `SID` varchar(20) NOT NULL DEFAULT '',
   `SPhone` varchar(20) NOT NULL DEFAULT '',
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`SID`,`SPhone`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `studentphone` (`SID`, `SPhone`, `Deleted`) VALUES
@@ -223,17 +205,69 @@ CREATE TABLE IF NOT EXISTS `takes` (
   `SID` varchar(20) NOT NULL DEFAULT '',
   `SecID` varchar(20) NOT NULL DEFAULT '',
   `Grade` varchar(2) NOT NULL,
-  `Deleted` char(1) NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`SID`,`SecID`),
-  KEY `FK_SecID` (`SecID`)
+  `Deleted` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `takes` (`SID`, `SecID`, `Grade`, `Deleted`) VALUES
 ('1', '2001', 'B', 'N'),
 ('1', '2002', 'A+', 'N'),
+('1', '2003', 'B+', 'N'),
 ('2', '2000', 'A', 'Y'),
-('3', '2003', 'B+', 'N'),
 ('4', '2003', 'C', 'N');
+
+
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`SID`,`SecId`),
+  ADD KEY `SID_FK` (`SID`),
+  ADD KEY `SecId_FK` (`SecId`);
+
+ALTER TABLE `college`
+  ADD PRIMARY KEY (`CName`),
+  ADD KEY `DeanId` (`DeanId`);
+
+ALTER TABLE `collegephone`
+  ADD PRIMARY KEY (`CName`,`CPhone`);
+
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`CoCode`),
+  ADD KEY `CoDCode` (`CoDCode`);
+
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`DCode`),
+  ADD UNIQUE KEY `DName` (`DName`),
+  ADD KEY `DeptChairID` (`DeptChairID`,`CName`),
+  ADD KEY `FK_CName` (`CName`);
+
+ALTER TABLE `deptphone`
+  ADD PRIMARY KEY (`DCode`,`DeptPhone`);
+
+ALTER TABLE `instrphone`
+  ADD PRIMARY KEY (`ID`,`IPhone`);
+
+ALTER TABLE `instructor`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `DCode` (`DCode`);
+
+ALTER TABLE `logindetail`
+  ADD PRIMARY KEY (`username`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `FK_SID_login` (`SID`);
+
+ALTER TABLE `section`
+  ADD PRIMARY KEY (`SecId`),
+  ADD KEY `InstructorID` (`InstructorID`,`CoCode`),
+  ADD KEY `FK_CoCode` (`CoCode`);
+
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`SID`),
+  ADD KEY `DCode` (`DCode`);
+
+ALTER TABLE `studentphone`
+  ADD PRIMARY KEY (`SID`,`SPhone`);
+
+ALTER TABLE `takes`
+  ADD PRIMARY KEY (`SID`,`SecID`),
+  ADD KEY `FK_SecID` (`SecID`);
 
 
 ALTER TABLE `cart`
@@ -278,3 +312,7 @@ ALTER TABLE `studentphone`
 ALTER TABLE `takes`
   ADD CONSTRAINT `FK_SID` FOREIGN KEY (`SID`) REFERENCES `student` (`SID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_SecID` FOREIGN KEY (`SecID`) REFERENCES `section` (`SecId`) ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
