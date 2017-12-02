@@ -11,13 +11,16 @@ session_start();
 	<meta name="author" content="Devanshu Sheth" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<script>
 		
 		$(document).ready(function () {
             
 			$("#btnSubmit").hide();
 			$("#result").hide();
+
+			 
+
             $("#btnSubmit").click(function () {
 				$("#result").hide();
 				if($("#optionTables").val() != "None")
@@ -26,6 +29,10 @@ session_start();
 				}
 				$(".div1").empty();
 				loadForm();
+
+			
+   
+
 			});
             
 			if($("#optionTables").val() != "None")
@@ -35,12 +42,14 @@ session_start();
             }
 			$("#optionTables").on("change", function () {
 				
+
         		$("#btnSubmit").show();
         		displayForm();
 			});
             
 			$(document).on('click', '.onUpdate', function () {
 				$(".div1").empty();
+				$("#nav").remove();
 				if($("#optionTables").val() != "None")
                 $("#btnSubmit").hide();
                 var closesttr = $(this).closest('tr');
@@ -82,7 +91,7 @@ session_start();
 									populateForm("#form1", data);
 								},
 								error: function (ts) {
-									alert("Error: " + ts.responseText);
+									alert("Error: error in fillformonupdate numprime2 " + ts.responseText);
 								}
 							});
 						}
@@ -107,7 +116,7 @@ session_start();
 									populateForm("#form1", data);
 								},
 								error: function (ts) {
-									alert(ts.responseText);
+									alert("error in fillformonupdate numprime1"+ts.responseText);
 								}
 							});
 						}
@@ -119,6 +128,8 @@ session_start();
 			});
 			$(document).on('click', '.btnDelete', function () {
 				$(".div1").empty();
+				$("#nav").remove();
+				$("#btnSubmit").show();
 				var closesttr = $(this).closest('tr');
 				//	$(".test").html(closesttr.attr('id'));
 				var idUpdate = closesttr.attr('id');
@@ -187,7 +198,7 @@ session_start();
 					success: function (rows) {
 						var tablechoice = $("#optionTables").val();
 						//$("#demo").show();
-						$form = $('<form id="form1" action="addEntry.php" method="POST"></form>').appendTo('.div1');
+						$form = $('<form class="form-group" id="form1" action="addEntry.php" method="POST"></form>').appendTo('.div1');
 						var tablestr = $('<input type="hidden"/>');
 						$form.append(tablestr);
 						tablestr.attr('name', 'tablename');
@@ -203,7 +214,7 @@ session_start();
 									data: { tablechoice: "college", columnchoice: "DeanId" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "DeanId" + " : ");
 										selectstr.attr('name', 'DeanId');
 										$form.append(selectstr);
@@ -225,7 +236,7 @@ session_start();
 									data: { tablechoice: "collegephone", columnchoice: "CName" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "CName" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "CName");
@@ -248,7 +259,7 @@ session_start();
 									data: { tablechoice: "course", columnchoice: "CoDCode" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "CoDCode" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "CoDCode");
@@ -271,7 +282,7 @@ session_start();
 									data: { tablechoice: "department", columnchoice: "DeptChairID" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr1 = $('<select>');
+										var selectstr1 = $('<select class="form-control">');
 										$form.append("<p>" + "DeptChairID" + " : ");
 										$form.append(selectstr1);
 										selectstr1.attr('name', "DeptChairID");
@@ -282,7 +293,7 @@ session_start();
 												$(selectstr1).append('<option>' + datarow['ID'] + '</option>');
 											}
 										}
-										$form.append('</select></p>');
+										$form.append('</select class="form-control"></p>');
 										var selectstr = $('<select>');
 										$form.append("<p>" + "CName" + " : ");
 										$form.append(selectstr);
@@ -308,7 +319,7 @@ session_start();
 									data: { tablechoice: "course", columnchoice: "DCode" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "DCode" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "DCode");
@@ -331,7 +342,7 @@ session_start();
 									data: { tablechoice: "instrphone", columnchoice: "ID" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "ID" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "ID");
@@ -354,7 +365,7 @@ session_start();
 									data: { tablechoice: "instructor", columnchoice: "DCode" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "DCode" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "DCode");
@@ -377,7 +388,7 @@ session_start();
 									data: { tablechoice: "section", columnchoice: "CoCode" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "InstructorID" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "InstructorID");
@@ -389,7 +400,7 @@ session_start();
 											}
 										}
 										$form.append('</select></p>');
-										var selectstr1 = $('<select>');
+										var selectstr1 = $('<select class="form-control">');
 										$form.append("<p>" + "CoCode" + " : ");
 										$form.append(selectstr1);
 										selectstr1.attr('name', "CoCode");
@@ -414,7 +425,7 @@ session_start();
 									data: { tablechoice: "student", columnchoice: "DCode" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "DCode" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "DCode");
@@ -437,7 +448,7 @@ session_start();
 									data: { tablechoice: "studentphone", columnchoice: "SID" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "SID" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "SID");
@@ -460,7 +471,7 @@ session_start();
 									data: { tablechoice: "takes", columnchoice: "SecID" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "SID" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "SID");
@@ -472,7 +483,7 @@ session_start();
 											}
 										}
 										$form.append('</select></p>');
-										var selectstr1 = $('<select>');
+										var selectstr1 = $('<select class="form-control">');
 										$form.append("<p>" + "SecID" + " : ");
 										$form.append(selectstr1);
 										selectstr1.attr('name', "SecID");
@@ -491,7 +502,7 @@ session_start();
 							else if (tablechoice == "logindetail" && rows[i] == "user_type")
 							{
 							
-								var selectstr = $('<select>');
+								var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "User_type" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "user_type");
@@ -507,7 +518,7 @@ session_start();
 									data: { tablechoice: "logindetail", columnchoice: "SID" },
 									dataType: "json",
 									success: function (datarows) {
-										var selectstr = $('<select>');
+										var selectstr = $('<select class="form-control">');
 										$form.append("<p>" + "SID" + " : ");
 										$form.append(selectstr);
 										selectstr.attr('name', "SID");
@@ -522,21 +533,80 @@ session_start();
 									}
 								});
 							}
+							else if (tablechoice == "cart" && rows[i] == "SecId") {
+								//$(".test").html(colname);
+								$.ajax({
+									async: false,
+									type: "GET",
+									url: "handleDropdown.php",
+									data: { tablechoice: "cart", columnchoice: "SecId" },
+									dataType: "json",
+									success: function (datarows) {
+
+
+										var selectstr = $('<select class="form-control">');
+										$form.append("<p>" + "SID" + " : ");
+										$form.append(selectstr);
+
+										selectstr.attr('name', "SID");
+
+										for (var i in datarows) {
+											var datarow = datarows[i];
+
+											var coldata = datarow['SID'];
+											if (datarow['SID']) {
+												$(selectstr).append('<option>' + datarow['SID'] + '</option>');
+											}
+
+
+										}
+										$form.append('</select></p>');
+
+
+										var selectstr1 = $('<select class="form-control">');
+										$form.append("<p>" + "SecId" + " : ");
+										$form.append(selectstr1);
+
+										selectstr1.attr('name', "SecId");
+
+										for (var i in datarows) {
+											var datarow = datarows[i];
+
+											var coldata = datarow['SecId'];
+											if (datarow['SecId']) {
+												$(selectstr1).append('<option>' + datarow['SecId'] + '</option>');
+											}
+
+
+										}
+										$form.append('</select></p>');
+
+									
+
+										
+
+
+
+										//		 $form.append("<p>" + '<input type="submit" value ="Add Entry" />' +  "</p>");
+									}
+
+								});
+							}
 							else if (rows[i] == "Deleted") {
-								var selectstr = $('<select>');
+								var selectstr = $('<select class="form-control">');
 								$form.append("<p>" + colname + " : ");
 								$form.append(selectstr);
 								selectstr.attr('name', colname);
 								$(selectstr).append('<option>' + "Y" + '</option>');
 								$(selectstr).append('<option selected>' + "N" + '</option>');
 								$form.append('</select></p>');
-								$form.append("<p>" + '<input type="submit" value ="Add Entry" />' + "</p>");
+								$form.append("<p>" + '<input class="btn-primary" type="submit" value ="Add Entry" />' + "</p>");
 								$form.append("<p>" + '<a class="btncancel" href="setSession.php">Cancel</a>' + "</p>");
 							}
-							else if ((tablechoice == "section" && rows[i] == "CoCode") || (tablechoice == "takes" && rows[i] == "SID") || (tablechoice == "department" && rows[i] == "CName")) {
+							else if ((tablechoice == "section" && rows[i] == "CoCode") || (tablechoice == "takes" && rows[i] == "SID") || (tablechoice == "department" && rows[i] == "CName") ||  (tablechoice == "cart" && rows[i] == "SID")) {
 							}
 							else {
-								var htmlstr = $('<input type="text"/>');
+								var htmlstr = $('<input class="form-control" type="text"/>');
 								$form.append("<p>" + colname + " : ");
 								$form.append(htmlstr);
 								$form.append("</p>");
@@ -575,6 +645,7 @@ session_start();
 				var columnnames = [];
 				$("#demo tbody tr").remove();
 				$("#demo tbody td").remove();
+				$("#nav").remove();
 				$.ajax({
 					async: false,
 					type: "GET",
@@ -599,8 +670,10 @@ session_start();
 					data: { tablechoice: $("#optionTables").val() },
 					dataType: "json",
 					success: function (rows) {
+						var numrows = 0;
+						var table = document.getElementById("demo");
 						for (var i in rows) {
-							var table = document.getElementById("demo");
+							
 							var row = table.insertRow(-1);
 							row.id = "rowDelete" + i.toString();
 							var row1 = rows[i];
@@ -610,13 +683,55 @@ session_start();
 								cell1.className = "onUpdate";
 							}
 							var cell2 = row.insertCell(-1);
-							cell2.innerHTML = '<button class="btnDelete" value="Delete" >Delete</button>';
+							cell2.innerHTML = '<button class="btnDelete btn btn-danger" value="Delete" >Delete</button>';
 							cell2.className = "onUpdate";
+
+							
 							//	$(".test").html(row.id);
 						}
+						var numrows = table.getElementsByTagName("tr").length;
+							
+						paginate(numrows, 6);
 					}
+					
 				});
+
+				
+
 			}
+
+
+function paginate(numrows, rowshown){
+
+	$("#demo").after('<div id="nav"></div>');
+		
+
+				var rowsShown = rowshown;
+				var rowsTotal = numrows;
+
+				var table = document.getElementById("demo");
+				var classrows = table.getElementsByTagName("tr");
+				
+				var numPages = rowsTotal/rowsShown;
+				for(i = 0;i < numPages;i++) {
+					var pageNum = i + 1;
+					$('#nav').append('<a href="#" rel="'+i+'">'+pageNum+'</a> ');
+				}
+				$(classrows).hide();
+				$(classrows).slice(0, rowsShown).show();
+				$('#nav a:first').addClass('active');
+				$('#nav a').bind('click', function(){
+
+					$('#nav a').removeClass('active');
+					$(this).addClass('active');
+					var currPage = $(this).attr('rel');
+					var startItem = currPage * rowsShown;
+					var endItem = startItem + rowsShown;
+					$(classrows).css('opacity','0.0').hide().slice(startItem, endItem).css('display','table-row').animate({opacity:1}, 300);
+				});
+
+}
+
 		});
 	</script>
 	<style>
@@ -650,6 +765,7 @@ session_start();
         .pageheader a{
 			text-decoration: none;
             color: white;
+			
 		}
 		th,
 		td {
@@ -664,16 +780,28 @@ session_start();
 			color: black;
 		}
 		.btncancel {
-  font: 15px Arial;
+  font: 20px Arial;
   text-decoration: none;
-  background-color: white;
-  color: #333333;
-  padding: 2px 6px 2px 6px;
+  background-color:blue;
+  color: white;
+  padding: 2px 12px 2px 12px;
   border-top: 1px solid #CCCCCC;
   border-right: 1px solid #333333;
   border-bottom: 1px solid #333333;
   border-left: 1px solid #CCCCCC;
 }
+.btncancel:hover {
+  font: 20px Arial;
+  text-decoration: none;
+  background-color:#ADD8E6;
+  color: white;
+  padding: 2px 12px 2px 12px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+
 	</style>
 </head>
 
@@ -683,9 +811,10 @@ session_start();
 	<h2 class="pageheader"><a href="Course.php">Course Registration</a></h2>
 	<p>
 		Table Name:
-		<select name="optionTables" id="optionTables" >
+		<select class="form-control" name="optionTables" id="optionTables" >
             <option selected value="<?php echo (isset($_SESSION['coltod'])) ? htmlspecialchars($_SESSION['coltod']) : 'None'; ?>" label="..."></option>
-            <option>college</option>
+			<option>cart</option>
+			<option>college</option>
 			<option>collegephone</option>
 			<option>course</option>
 			<option>department</option>
@@ -703,7 +832,7 @@ session_start();
 
 	<div class="div1"></div>
 	<div id="result">
-		<table id="demo">
+		<table id="demo" class=".table-striped">
 			<thead id="headtable">
 			</thead>
 			<tbody>
@@ -716,7 +845,7 @@ session_start();
 		
 	</div>
 	<div>
-		<button id="btnSubmit">Add A New Entry</button>
+		<button class="btn btn-primary" id="btnSubmit">Add A New Entry</button>
 	</div>
 	<div class="test" id="test"></div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>

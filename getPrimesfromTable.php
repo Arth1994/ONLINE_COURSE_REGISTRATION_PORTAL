@@ -5,7 +5,7 @@ session_start();
 	$password = "admin";
 	
 	$chosenTable = $_GET['tablechoice'];
-	//$chosenTable = "takes";
+	//$chosenTable = "cart";
 	
 	$conn = mysqli_connect('localhost', 'root', 'root', 'courseregistration');
 	if (!$conn) {

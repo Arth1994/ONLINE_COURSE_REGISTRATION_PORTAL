@@ -55,7 +55,7 @@ session_start();
 	{
 		$result = mysqli_query($conn,"SELECT SID from student");
 	}
-	else if($chosenTable == "takes")
+	else if($chosenTable == "takes" || $chosenTable == "cart")
 	{
 		$query  = "SELECT SecId from section;";
 		$query1 = "SELECT SID from student;";
@@ -70,7 +70,7 @@ session_start();
 	{
 		$data[] = $userData;
 	}
-	if($chosenTable == "department" || $chosenTable == "section" || $chosenTable == "takes")
+	if($chosenTable == "department" || $chosenTable == "section" || $chosenTable == "takes" || $chosenTable == "cart")
 	{
 	while(	$userData = mysqli_fetch_array($result1, MYSQLI_ASSOC))
 	{

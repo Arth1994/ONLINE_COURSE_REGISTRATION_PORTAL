@@ -11,81 +11,74 @@ session_start()
 
     <script>
         $(document).ready(function(){
-            $(document).on("change", '#college', function(e){
-                var college = $('#college').val();
-                $.ajax({
-                    url: 'getDepartments.php',
-                    type: 'POST',
-                    data: {college: college}, 
-                    dataType : "json",
-                    success: function (result) {
-                        $('#department').empty();
-                        $('#course').empty();
-                        $('#section').empty();
-                        for (var key in result){
-                            $('#department').append(result[key]);
-                        }
+            var userID = <?php echo $_SESSION['user']['SID'];?>;
+            $.ajax({
+                async: false,
+                url: 'getCartEntries.php',
+                type: 'POST',
+                data: {userID: userID},
+                dataType: 'json',
+                success: function(result) {
+                    $('#results').empty();
+                    for (var key in result){
+                        $('#results').append(result[key]);
                     }
-                }).done(function(){
-                })
+                }
+
             });
-            $(document).on("change", '#department', function(e){
-                var department = $('#department').val();
+            $(document).on("click", ".remove", function(e){
+                var primarykeyValue1 = $(this).attr('id');
+                var primekey1 = 'SecId';
+                var primarykeyValue2 = userID;
+                var primekey2 = 'SID';
+                var tablechoice = 'cart';
+                // var trelement = document.getElementbyId(primarykeyValue1);
                 $.ajax({
-                    url: 'getCourses.php',
-                    type: 'POST',
-                    data: {department: department}, 
-                    dataType : "json",
-                    success: function (result) {
-                        $('#course').empty();
-                        $('#section').empty();
-                        for (var key in result){
-                            $('#course').append(result[key]);
-                        }
+                    async: false,
+                    url: 'deleteEntry.php',
+                    type: 'GET',
+                    data: {primarykeyValue1: primarykeyValue1, primekey1:primekey1, primarykeyValue2:primarykeyValue2, primekey2:primekey2, tablechoice:tablechoice},
+                    dataType: 'text',
+                    success: function(result) {
+                        // trelement.parent.parent.remove(trelement.selectedIndex);
                     }
-                })
+
+                });
             });
-            $(document).on("change", '#course', function(e){
-                var course = $('#course').val();
-                $.ajax({
-                    url: 'getSections.php',
-                    type: 'POST',
-                    data: {course: course}, 
-                    dataType : "json",
-                    success: function (result) {
-                        $('#section').empty();
-                        for (var key in result){
-                            $('#section').append(result[key]);
+            $(document).on("click", "#enroll", function(e){
+               var rowCount = $('#results tr').length - 1;
+               if(rowCount <= 0 || rowCount > 3){
+                    alert("You can only enroll in up to 3 classes")
+               } else {
+                //    $('#results').each(function(i, row) {
+
+                //    })
+                    var sectionIDS = [];
+                    $(".remove").each(function(){
+                        sectionIDS.push($(this).attr('id'));
+                    });
+                   $.ajax({
+                        type: 'POST',
+                        data: {userID: userID, sectionIDS: sectionIDS},
+                        url: 'enroll.php',
+                        success: function(result) {
+                            alert(result);
                         }
-                    }
-                })
-            });
+                   });
+               }
+               
+            })
         });
     </script>
 </head>
 
 <body>
 
-    <form method='post' id='class' action="addToCart.php">
-        <table style="width:100%">
-            <tr>
-                <th>Firstname</th>
-                <th>Lastname</th> 
-                <th>Age</th>
-            </tr>
-            <tr>
-                <td>Jill</td>
-                <td>Smith</td> 
-                <td>50</td>
-            </tr>
-            <tr>
-                <td>Eve</td>
-                <td>Jackson</td> 
-                <td>94</td>
-            </tr>
-        </table>
-    </form>
-    
+    <table id='results'>
+    </table>
+    <br>
+    <button id='enroll'>Enroll</button>
+    <a href='enrollment.php'>Search for Classes</a>
 </body>
 
 </html>
