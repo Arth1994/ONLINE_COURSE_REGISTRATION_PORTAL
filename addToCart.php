@@ -30,7 +30,6 @@
     $result = mysqli_query($con, $query);
     $sectionLimit = mysqli_fetch_assoc($result)['SectionLimit'];
 
-    print_r($sectionLimit);
     if($sectionLimit - 1 < 0){
         // section is full, reroute to search
        echo "Section is Full";
@@ -45,12 +44,17 @@
             $query = "UPDATE section SET SectionLimit= $sectionLimit WHERE SecId='$sectionID'";
             mysqli_query($con, $query);
             echo "Added";
-        }  
+        } 
+        elseif(mysqli_num_rows(mysqli_query($con, "SELECT * FROM cart WHERE SecId='$sectionID' AND SID='$userID'")) > 0) {
+            $query = "UPDATE cart SET Deleted = 'N' WHERE SecId= '$sectionID' AND SID='$userID'";
+            mysqli_query($con, $query);
+            echo "Added";
+        } 
        else{
-        echo $query . "<br>" . mysqli_error($con);
+            echo $query . "<br>" . mysqli_error($con);
        }
       
-        //header("Location: enrollment.php");
+
     }
 
     // route to view cart page

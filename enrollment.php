@@ -111,8 +111,10 @@ session_start();
                     type: 'POST',
                     data: {sectionID: sectionID, userID: userID},
                     success: function (result){
-                        if (result != "Added"){
+                        if (result == "Added" || result == "Section is Full"){
                             alert(result);
+                        } else {
+                            alert("This course is already in your cart");
                         }
                     },
                     error: function(e){
@@ -218,15 +220,9 @@ session_start();
     </form>
     
     <table id='results'>
-            <!-- <tr>
-                <th>Department</th>
-                <th>Course Number</th> 
-                <th>Course Name</th>
-                <th>Day</th>
-                <th>Time</th>
-                <th>Section Number</th>
-            </tr> -->
     </table>
+
+    <a href='cart.php'>Cart</a>
 </body>
 
 </html>
