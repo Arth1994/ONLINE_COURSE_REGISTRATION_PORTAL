@@ -629,6 +629,60 @@
 
 								});
 							}
+							else if (tablechoice == "cart" && rows[i] == "SecId") {
+								//$(".test").html(colname);
+								$.ajax({
+									async: false,
+									type: "GET",
+									url: "handleDropdown.php",
+									data: { tablechoice: "takes", columnchoice: "SecId" },
+									dataType: "json",
+									success: function (datarows) {
+
+
+										var selectstr = $('<select>');
+										$form.append("<p>" + "SID" + " : ");
+										$form.append(selectstr);
+
+										selectstr.attr('name', "SID");
+
+										for (var i in datarows) {
+											var datarow = datarows[i];
+
+											var coldata = datarow['SID'];
+											if (datarow['SID']) {
+												$(selectstr).append('<option>' + datarow['SID'] + '</option>');
+											}
+
+
+										}
+										$form.append('</select></p>');
+
+										var selectstr1 = $('<select>');
+										$form.append("<p>" + "SecI" + " : ");
+										$form.append(selectstr1);
+
+										selectstr1.attr('name', "SecId");
+
+										for (var i in datarows) {
+											var datarow = datarows[i];
+
+											var coldata = datarow['SecId'];
+											if (datarow['SecId']) {
+												$(selectstr1).append('<option>' + datarow['SecId'] + '</option>');
+											}
+
+
+										}
+										$form.append('</select></p>');
+
+
+
+										//		 $form.append("<p>" + '<input type="submit" value ="Add Entry" />' +  "</p>");
+									}
+
+								});
+							}
 							else if (rows[i] == "Deleted") {
 								var selectstr = $('<select>');
 								$form.append("<p>" + colname + " : ");
@@ -640,7 +694,7 @@
 								$form.append('</select></p>');
 								$form.append("<p>" + '<input type="submit" value ="Add Entry" />' + "</p>");
 							}
-							else if ((tablechoice == "section" && rows[i] == "CoCode") || (tablechoice == "takes" && rows[i] == "SID") || (tablechoice == "department" && rows[i] == "CName")) {
+							else if ((tablechoice == "section" && rows[i] == "CoCode") || (tablechoice == "takes" && rows[i] == "SID") || (tablechoice == "department" && rows[i] == "CName") ||  (tablechoice == "cart" && rows[i] == "SID")) {
 							}
 
 
@@ -818,6 +872,7 @@
 		Table Name:
 		<select name="optionTables" id="optionTables">
 			<option selected>None</option>
+			<option>cart</option>
 			<option>college</option>
 			<option>collegephone</option>
 			<option>course</option>

@@ -8,18 +8,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 CREATE DATABASE IF NOT EXISTS `courseregistration` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `courseregistration`;
 
-DROP TABLE IF EXISTS `cart`;
-CREATE TABLE IF NOT EXISTS `cart` (
-  `SID` varchar(11) NOT NULL,
-  `SecId` varchar(11) NOT NULL,
-  `Deleted` char(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `cart` (`SID`, `SecId`, `Deleted`) VALUES
-('0', '2003', 'N'),
-('1', '2004', 'N');
-
-DROP TABLE IF EXISTS `college`;
 CREATE TABLE IF NOT EXISTS `college` (
   `CName` varchar(20) NOT NULL,
   `COffice` varchar(20) NOT NULL,
@@ -28,11 +16,10 @@ CREATE TABLE IF NOT EXISTS `college` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `college` (`CName`, `COffice`, `DeanId`, `Deleted`) VALUES
-('ATEC', '25', '1001', 'N'),
+('ATEC', '25', '1002', 'N'),
 ('ECS', '21', '1003', 'N'),
 ('JSOM', '22', '1002', 'N');
 
-DROP TABLE IF EXISTS `collegephone`;
 CREATE TABLE IF NOT EXISTS `collegephone` (
   `CName` varchar(20) NOT NULL DEFAULT '',
   `CPhone` varchar(20) NOT NULL DEFAULT '',
@@ -46,7 +33,6 @@ INSERT INTO `collegephone` (`CName`, `CPhone`, `Deleted`) VALUES
 ('JSOM', '12345', 'N'),
 ('JSOM', '222', 'N');
 
-DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
   `CoCode` int(5) NOT NULL DEFAULT '0',
   `CoName` varchar(20) DEFAULT NULL,
@@ -60,11 +46,10 @@ CREATE TABLE IF NOT EXISTS `course` (
 INSERT INTO `course` (`CoCode`, `CoName`, `Credits`, `Level`, `CoDescription`, `CoDCode`, `Deleted`) VALUES
 (1, 'AI', 3, '6389', 'ARTIFICIAL INTELLIGENCE ', 10, 'N'),
 (2, 'DB', 3, '6360', 'DATABASE DESIGN', 10, 'N'),
-(3, 'DM', 3, '6000', 'DATA MINING', 10, 'N'),
+(3, 'DM', 3, '6000', 'DATA MINING', 11, 'N'),
 (4, 'BI', 3, '6000', 'BUSINESS INTELLIGENCE', 11, 'N'),
 (5, 'HM', 3, '6000', 'HUMANITIES', 12, 'N');
 
-DROP TABLE IF EXISTS `department`;
 CREATE TABLE IF NOT EXISTS `department` (
   `DCode` int(5) NOT NULL DEFAULT '0',
   `DName` varchar(20) DEFAULT NULL,
@@ -79,7 +64,6 @@ INSERT INTO `department` (`DCode`, `DName`, `DOffice`, `DeptChairID`, `CName`, `
 (11, 'ITM', '111', '1002', 'JSOM', 'N'),
 (12, 'ARTS', '112', '1003', 'ATEC', 'N');
 
-DROP TABLE IF EXISTS `deptphone`;
 CREATE TABLE IF NOT EXISTS `deptphone` (
   `DCode` int(5) NOT NULL DEFAULT '0',
   `DeptPhone` varchar(20) NOT NULL DEFAULT '',
@@ -92,7 +76,6 @@ INSERT INTO `deptphone` (`DCode`, `DeptPhone`, `Deleted`) VALUES
 (12, '3333333333', 'N'),
 (12, '4444444444', 'N');
 
-DROP TABLE IF EXISTS `instrphone`;
 CREATE TABLE IF NOT EXISTS `instrphone` (
   `ID` varchar(20) NOT NULL DEFAULT '',
   `IPhone` varchar(20) NOT NULL DEFAULT '',
@@ -106,7 +89,6 @@ INSERT INTO `instrphone` (`ID`, `IPhone`, `Deleted`) VALUES
 ('1004', '8888888888', 'N'),
 ('1005', '4444444444', 'N');
 
-DROP TABLE IF EXISTS `instructor`;
 CREATE TABLE IF NOT EXISTS `instructor` (
   `ID` varchar(20) NOT NULL DEFAULT '',
   `Rank` varchar(20) NOT NULL,
@@ -123,7 +105,6 @@ INSERT INTO `instructor` (`ID`, `Rank`, `IName`, `IOffice`, `DCode`, `Deleted`) 
 ('1004', '0004', 'CATYLYN JOSEPH', '203', 11, 'N'),
 ('1005', '0005', 'JONAH', '204', 12, 'N');
 
-DROP TABLE IF EXISTS `logindetail`;
 CREATE TABLE IF NOT EXISTS `logindetail` (
   `username` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -141,7 +122,6 @@ INSERT INTO `logindetail` (`username`, `email`, `user_type`, `password`, `SID`, 
 ('dmfl', 'kmlf@mkflgq', 'admin', '1084c29da0ccd38cfcf3d9c92c148026', '2', 'N'),
 ('dmk', 'MK@MDL', 'user', '1084c29da0ccd38cfcf3d9c92c148026', '4', 'N');
 
-DROP TABLE IF EXISTS `section`;
 CREATE TABLE IF NOT EXISTS `section` (
   `SecId` varchar(20) NOT NULL DEFAULT '',
   `SecNo` varchar(3) DEFAULT NULL,
@@ -160,12 +140,11 @@ CREATE TABLE IF NOT EXISTS `section` (
 
 INSERT INTO `section` (`SecId`, `SecNo`, `Sem`, `OpenClosed`, `Year`, `RoomNo`, `Building`, `DaysTime`, `InstructorID`, `CoCode`, `SectionLimit`, `MaxCapacity`, `Deleted`) VALUES
 ('2000', '850', 1, 'N', 2017, '400', 'ECSS', '1:00-2:15', '1001', 1, 50, 50, 'N'),
-('2001', '851', 1, 'N', 2017, '401', 'ECSN', '11:00-12:15', '1002', 1, 0, 1, 'N'),
+('2001', '851', 1, 'N', 2017, '401', 'ECSN', '11:00-12:15', '1002', 1, 100, 100, 'N'),
 ('2002', '852', 2, 'Y', 2018, '402', 'JSOM1', '1:00-2:15', '1003', 3, 22, 22, 'N'),
 ('2003', '853', 2, 'N', 2017, '403', 'JSOM2', '11:00-12:15', '1004', 4, 100, 100, 'N'),
 ('2004', '854', 2, 'N', 2018, '404', 'ATEC', '10:00-11:15', '1005', 5, 60, 60, 'N');
 
-DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
   `SID` varchar(20) NOT NULL DEFAULT '',
   `DOB` date NOT NULL,
@@ -186,7 +165,6 @@ INSERT INTO `student` (`SID`, `DOB`, `SFname`, `SMname`, `SLname`, `Address`, `M
 ('4', '2017-10-04', 'EDEN', 'BHAVESH', 'HAZARD', '1011 COIT ROAD', 'MIS', 11, 'N'),
 ('5', '2017-10-05', 'JAMIE', 'KUMAR', 'VARDY', '1011 PRESTON ROAD', 'ARTS', 12, 'N');
 
-DROP TABLE IF EXISTS `studentphone`;
 CREATE TABLE IF NOT EXISTS `studentphone` (
   `SID` varchar(20) NOT NULL DEFAULT '',
   `SPhone` varchar(20) NOT NULL DEFAULT '',
@@ -200,7 +178,6 @@ INSERT INTO `studentphone` (`SID`, `SPhone`, `Deleted`) VALUES
 ('4', '4444555555', 'N'),
 ('5', '5555666666', 'N');
 
-DROP TABLE IF EXISTS `takes`;
 CREATE TABLE IF NOT EXISTS `takes` (
   `SID` varchar(20) NOT NULL DEFAULT '',
   `SecID` varchar(20) NOT NULL DEFAULT '',
@@ -211,15 +188,10 @@ CREATE TABLE IF NOT EXISTS `takes` (
 INSERT INTO `takes` (`SID`, `SecID`, `Grade`, `Deleted`) VALUES
 ('1', '2001', 'B', 'N'),
 ('1', '2002', 'A+', 'N'),
-('1', '2003', 'B+', 'N'),
 ('2', '2000', 'A', 'Y'),
+('3', '2003', 'B+', 'N'),
 ('4', '2003', 'C', 'N');
 
-
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`SID`,`SecId`),
-  ADD KEY `SID_FK` (`SID`),
-  ADD KEY `SecId_FK` (`SecId`);
 
 ALTER TABLE `college`
   ADD PRIMARY KEY (`CName`),
@@ -269,10 +241,6 @@ ALTER TABLE `takes`
   ADD PRIMARY KEY (`SID`,`SecID`),
   ADD KEY `FK_SecID` (`SecID`);
 
-
-ALTER TABLE `cart`
-  ADD CONSTRAINT `SID_FK` FOREIGN KEY (`SID`) REFERENCES `student` (`SID`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `SecId_FK` FOREIGN KEY (`SecId`) REFERENCES `section` (`SecId`) ON UPDATE CASCADE;
 
 ALTER TABLE `college`
   ADD CONSTRAINT `FK_DeanID` FOREIGN KEY (`DeanId`) REFERENCES `instructor` (`ID`) ON UPDATE CASCADE;
