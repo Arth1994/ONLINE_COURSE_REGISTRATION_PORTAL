@@ -14,9 +14,12 @@ session_start();
         
         $(document).ready(function(){
             $('#results').hide();
+
             $(document).on("keyup", '#txtsearch', function(e){
-                
-                
+                $('#college').val('');
+                $('#department').val('');
+                $('#course').val('');
+                $('#section').val('');
                 var txtsearch = $('#txtsearch').val();
                 if(txtsearch == '')
                 {
@@ -48,6 +51,7 @@ session_start();
             });
             $(document).on("change", '#college', function(e){
                 var college = $('#college').val();
+                
                 $.ajax({
                     async:false,
                     url: 'getCourseTableEntries.php',
@@ -65,8 +69,7 @@ session_start();
                         paginate();
                         $('#results').show();
                     }
-                }).done(function(){
-                })
+                });
             });
             $(document).on("change", '#college', function(e){
                 var college = $('#college').val();
@@ -84,8 +87,7 @@ session_start();
                             $('#department').append(result[key]);
                         }
                         }
-                }).done(function(){
-                })
+                });
             });
             $(document).on("change", '#department', function(e){
                 var department = $('#department').val();
@@ -102,7 +104,7 @@ session_start();
                             $('#course').append(result[key]);
                         }
                     }
-                })
+                });
             });
             $(document).on("change", '#department', function(e){
                 var college = $('#college').val();
@@ -124,8 +126,7 @@ session_start();
                         paginate();
                         $('#results').show();
                     }
-                }).done(function(){
-                })
+                });
             });
             $(document).on("change", '#course', function(e){
                 var course = $('#course').val();
@@ -144,6 +145,54 @@ session_start();
                     }
                 });
             });
+            $(document).on("change", '#course', function(e){
+                var college = $('#college').val();
+                var department = $('#department').val();
+                var course = $('#course').val();
+                $.ajax({
+                    async:false,
+                    url: 'getCourseTableEntries.php',
+                    type: 'POST',
+                    data: {college: college, department: department, course:course}, 
+                    dataType : "json",
+                    success: function (result) {
+                        $('#results').empty();
+                        // $('#department').empty();
+                        // $('#course').empty();
+                        // $('#section').empty();
+                        for (var key in result){
+                            $('#results').append(result[key]);
+                        }
+                        paginate();
+                        $('#results').show();
+                    }
+                });
+            });
+
+            $(document).on("change", '#section', function(e){
+                var college = $('#college').val();
+                var department = $('#department').val();
+                var course = $('#course').val();
+                var section = $('#section').val();
+                $.ajax({
+                    async:false,
+                    url: 'getCourseTableEntries.php',
+                    type: 'POST',
+                    data: {college: college, department: department, course:course, section:section}, 
+                    dataType : "json",
+                    success: function (result) {
+                        $('#results').empty();
+                        // $('#department').empty();
+                        // $('#course').empty();
+                        // $('#section').empty();
+                        for (var key in result){
+                            $('#results').append(result[key]);
+                        }
+                        paginate();
+                        $('#results').show();
+                    }
+                });
+            });
             $(document).on("click", '.add', function(e){
                 var sectionID = $(this).attr('id');
                 var userID = <?php echo $_SESSION['user']['SID']; ?>; 
@@ -153,7 +202,7 @@ session_start();
                     type: 'POST',
                     data: {sectionID: sectionID, userID: userID},
                     success: function (result){
-                        if (result == "Added" || result == "Section is Full"){
+                        if (result == "Added" || result== "Added again" ){
                             alert(result);
                         } else {
                             alert("This course is already in your cart");
@@ -247,8 +296,31 @@ session_start();
   margin-right:8px;
 }
 
+.btncancel {
+  font: 20px Arial;
+  text-decoration: none;
+  background-color:blue;
+  color: white;
+  padding: 2px 12px 2px 12px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+.btncancel:hover {
+  font: 20px Arial;
+  text-decoration: none;
+  background-color:#ADD8E6;
+  color: white;
+  padding: 2px 12px 2px 12px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
 
-	</style>
+
+</style>
 </head>
 
 <body>
@@ -260,7 +332,7 @@ session_start();
         
             
             <div >
-                Search for Course: <input class="form-control" type="text" id="txtsearch"></input>
+                Search for Course: <input class="form-control" type="text" id="txtsearch"/>
             </div>
         <br/>
         <div class="form-inline">
@@ -299,9 +371,9 @@ session_start();
             <option value = ""></option>
         </select>
         </div>
-            </div> 
+        </div> 
         <br/>
-        <input type="submit" class="btn btn-primary" value="Add to cart" id="submit"/>
+       
         
     </form>
     
@@ -309,10 +381,10 @@ session_start();
     <table id='results'>
     </table>
 
-    <a href='cart.php'>Cart</a>
+    <a class="btn btn-primary" href='cart.php'>Go to Cart</a>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
 </body>
 
 </html>

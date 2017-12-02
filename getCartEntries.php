@@ -14,7 +14,7 @@
         $response[] = "<tr><th>Department</th><th>Course Number</th><th>Course Name</th><th>Time</th><th>Section Number</th><th>Remove</th></tr>";
         while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
             if ($row[6] == 'N') {
-                $response[] = "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td><td><button class='remove' id ='". $row[5] ."'>Remove</button></td></tr>";
+                $response[] = "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td><td><button class='remove btn btn-danger' id ='". $row[5] ."'>Remove</button></td></tr>";
             } 
         }
         echo json_encode($response);

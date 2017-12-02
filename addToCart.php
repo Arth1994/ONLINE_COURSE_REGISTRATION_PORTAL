@@ -26,36 +26,26 @@
    $userID = $_REQUEST['userID'];
 
 
-    $query = "SELECT SectionLimit FROM section WHERE SecId = '$sectionID'";
-    $result = mysqli_query($con, $query);
-    $sectionLimit = mysqli_fetch_assoc($result)['SectionLimit'];
-
-    if($sectionLimit - 1 < 0){
-        // section is full, reroute to search
-       echo "Section is Full";
-    }
-    else{
+   
+   
         // add to cart table
         $query = "INSERT INTO cart (SecId, SID, Deleted) VALUES ('$sectionID', '$userID', 'N' )";
         if(mysqli_query($con, $query))
         {
-            $sectionLimit = $sectionLimit - 1; 
-         
-            $query = "UPDATE section SET SectionLimit= $sectionLimit WHERE SecId='$sectionID'";
-            mysqli_query($con, $query);
+            
             echo "Added";
         } 
-        elseif(mysqli_num_rows(mysqli_query($con, "SELECT * FROM cart WHERE SecId='$sectionID' AND SID='$userID'")) > 0) {
+        elseif(mysqli_num_rows(mysqli_query($con, "SELECT * FROM cart WHERE SecId='$sectionID' AND SID='$userID' AND cart.Deleted = 'Y'")) > 0) {
             $query = "UPDATE cart SET Deleted = 'N' WHERE SecId= '$sectionID' AND SID='$userID'";
             mysqli_query($con, $query);
-            echo "Added";
+            echo "Added again";
         } 
        else{
             echo $query . "<br>" . mysqli_error($con);
        }
       
 
-    }
+    
 
     // route to view cart page
     mysqli_close($con);

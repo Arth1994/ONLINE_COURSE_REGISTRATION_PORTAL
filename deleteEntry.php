@@ -19,9 +19,12 @@ if($_GET['primekey2'])
 
 }
 
+
+
 if($primekey2)
 {
-    $sql = "UPDATE $chosenTable SET Deleted='Y' where $primekey1 = '$primarykeyValue1' && $primekey2 = '$primarykeyValue2'";
+	$sql = "UPDATE $chosenTable SET Deleted='Y' where $primekey1 = '$primarykeyValue1' && $primekey2 = '$primarykeyValue2'";
+	
 }
 else{
     $sql = "UPDATE $chosenTable SET Deleted='Y' where $primekey1 = '$primarykeyValue1'";

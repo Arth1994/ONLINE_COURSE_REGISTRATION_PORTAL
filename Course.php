@@ -600,8 +600,8 @@ session_start();
 								$(selectstr).append('<option>' + "Y" + '</option>');
 								$(selectstr).append('<option selected>' + "N" + '</option>');
 								$form.append('</select></p>');
-								$form.append("<p>" + '<input class="btn-primary" type="submit" value ="Add Entry" />' + "</p>");
-								$form.append("<p>" + '<a class="btncancel" href="setSession.php">Cancel</a>' + "</p>");
+								$form.append("<p>" + '<input class="btn btn-primary" type="submit" value ="Add Entry" />' + "</p>");
+								$form.append("<p>" + '<a class="btn btn-primary" href="setSession.php">Cancel</a>' + "</p>");
 							}
 							else if ((tablechoice == "section" && rows[i] == "CoCode") || (tablechoice == "takes" && rows[i] == "SID") || (tablechoice == "department" && rows[i] == "CName") ||  (tablechoice == "cart" && rows[i] == "SID")) {
 							}
@@ -808,7 +808,7 @@ function paginate(numrows, rowshown){
 <body>
 
 
-	<h2 class="pageheader"><a href="Course.php">Course Registration</a></h2>
+	<h2 class="pageheader"><a href="Course.php">Admin Page</a></h2>
 	<p>
 		Table Name:
 		<select class="form-control" name="optionTables" id="optionTables" >
