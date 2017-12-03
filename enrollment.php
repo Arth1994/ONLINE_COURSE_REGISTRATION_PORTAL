@@ -330,7 +330,7 @@ session_start();
         </button>
         <a class="navbar-brand" href="">
           <img src="images/utd.png" alt="">
-          <span class="text--bold">Admin Page</span>
+          <span class="text--bold">Search for Classes</span>
         </a>
       </div>
 

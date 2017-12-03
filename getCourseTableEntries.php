@@ -13,7 +13,7 @@
 
     if(isset($txtsearch))
     {
-        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE department.CName ='" . $txtsearch . "' || department.DName='" . $txtsearch . "'  || course.CoDescription= '$txtsearch'  || course.Level= '$txtsearch'";
+        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE section.OpenClosed = 'Y' AND section.Deleted = 'N' AND (department.CName ='$txtsearch' || department.DName='$txtsearch'  || course.CoDescription= '$txtsearch'  || course.Level= '$txtsearch') ";
         
         $result = mysqli_query($con, $query);
         $response = array();
@@ -25,7 +25,7 @@
         
     }
     if (isset($college) and !isset($department) and !isset($course) and !isset($section)){
-        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo, section.SecId FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE department.CName ='" . $college . "'";
+        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo, section.SecId FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE  section.OpenClosed = 'Y' AND section.Deleted = 'N' AND department.CName ='$college'";
         
         $result = mysqli_query($con, $query);
         $response = array();
@@ -34,7 +34,7 @@
             $response[] = "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td><td><button class='add btn btn-primary' id ='". $row[5] ."'>Add</button></td></tr>";
         }
     } elseif (isset($college) and isset($department) and !isset($course) and !isset($section)) {
-        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo,section.SecId FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE department.CName ='" . $college . "' AND department.DName='" . $department . "'";
+        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo,section.SecId FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE  section.OpenClosed = 'Y' AND section.Deleted = 'N' AND department.CName ='$college' AND department.DName='$department'";
         
         $result = mysqli_query($con, $query);
         $response = array();
@@ -43,7 +43,7 @@
             $response[] = "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td><td><button class='add btn btn-primary'  id ='". $row[5] ."'>Add</button></td></tr>";
         }
     } elseif (isset($college) and isset($department) and isset($course) and !isset($section)) {
-        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo, section.SecId FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE department.CName ='$college' AND department.DName='$department' AND course.CoDescription= '$course'";
+        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo, section.SecId FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE   section.OpenClosed = 'Y' AND section.Deleted = 'N' AND department.CName ='$college' AND department.DName='$department' AND course.CoDescription= '$course'";
         
         $result = mysqli_query($con, $query);
         $response = array();
@@ -53,7 +53,7 @@
         }
     }
     elseif (isset($college) and isset($department) and isset($course) and isset($section)) {
-        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo,section.SecId FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE department.CName ='$college' AND department.DName='$department' AND course.CoDescription= '$course' AND section.SecNo ='$section'";
+        $query = "SELECT department.DName, course.Level, course.CoDescription, section.DaysTime, section.SecNo,section.SecId FROM department INNER JOIN course ON department.DCode = course.CoDCode INNER JOIN section ON course.CoCode = section.CoCode WHERE  section.OpenClosed = 'Y' AND section.Deleted = 'N' AND department.CName ='$college' AND department.DName='$department' AND course.CoDescription= '$course' AND section.SecNo ='$section'";
         
         $result = mysqli_query($con, $query);
         $response = array();
