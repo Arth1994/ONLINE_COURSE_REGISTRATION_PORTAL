@@ -162,7 +162,7 @@ session_start()
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li class="active">
-            <a href="front_end.html">home
+            <a href="index.html">home
               <span class="sr-only">(current)</span>
             </a>
           </li>
