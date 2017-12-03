@@ -22,7 +22,7 @@
 	if (isset($_GET['logout'])) {
 		session_destroy();
 		unset($_SESSION['user']);
-		header("location: ../login.php");
+		header("location: login.php");
 	}
 
 	// REGISTER USER
@@ -145,7 +145,7 @@
 
 					$_SESSION['user'] = $logged_in_user;
 					$_SESSION['success']  = "You are now logged in";
-					header('location: admin/home.php');		  
+					header('location: home.php');		  
 				}else{
 					$_SESSION['user'] = $logged_in_user;
 					$_SESSION['success']  = "You are now logged in";

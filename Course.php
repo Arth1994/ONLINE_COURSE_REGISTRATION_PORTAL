@@ -11,7 +11,14 @@ session_start();
 	<meta name="author" content="Devanshu Sheth" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link href="css/ionicons.min.css" rel="stylesheet">
+	<link href="css/linear-icon.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/owl.carousel.css" rel="stylesheet">
+	<link href="css/owl.theme.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/weblysleek-ui-fonts.css">
+	<link rel="stylesheet" href="css/main.css">
 	<script>
 		
 		$(document).ready(function () {
@@ -735,19 +742,8 @@ function paginate(numrows, rowshown){
 		});
 	</script>
 	<style>
-		body {
-			background-color: black;
-			font-family: Georgia, 'Times New Roman', Times, serif;
-			color: white;
-		}
-		select {
-			background-color: white;
-		}
-		button {
-			background-color: white;
-			text-align: center;
-			font-size: 15px;
-		}
+		
+		
 		table,
 		td,
 		th {
@@ -764,7 +760,7 @@ function paginate(numrows, rowshown){
 		}
         .pageheader a{
 			text-decoration: none;
-            color: white;
+            color: black;
 			
 		}
 		th,
@@ -783,7 +779,7 @@ function paginate(numrows, rowshown){
   font: 20px Arial;
   text-decoration: none;
   background-color:blue;
-  color: white;
+  color: black;
   padding: 2px 12px 2px 12px;
   border-top: 1px solid #CCCCCC;
   border-right: 1px solid #333333;
@@ -794,7 +790,7 @@ function paginate(numrows, rowshown){
   font: 20px Arial;
   text-decoration: none;
   background-color:#ADD8E6;
-  color: white;
+  color: black;
   padding: 2px 12px 2px 12px;
   border-top: 1px solid #CCCCCC;
   border-right: 1px solid #333333;
@@ -807,50 +803,121 @@ function paginate(numrows, rowshown){
 
 <body>
 
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="">
+          <img src="images/utd.png" alt="">
+          <span class="text--bold">Admin Page</span>
+        </a>
+      </div>
 
-	<h2 class="pageheader"><a href="Course.php">Admin Page</a></h2>
-	<p>
-		Table Name:
-		<select class="form-control" name="optionTables" id="optionTables" >
-            <option selected value="<?php echo (isset($_SESSION['coltod'])) ? htmlspecialchars($_SESSION['coltod']) : 'None'; ?>" label="..."></option>
-			<option>cart</option>
-			<option>college</option>
-			<option>collegephone</option>
-			<option>course</option>
-			<option>department</option>
-			<option>deptphone</option>
-			<option>instrphone</option>
-			<option>instructor</option>
-			<option>logindetail</option>
-			<option>section</option>
-			<option>student</option>
-			<option>studentphone</option>
-			<option>takes</option>
-		</select>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active">
+            <a href="index.html">home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <a href="about.html">about</a>
+          </li>
+          <li>
+            <a href="login.php">login</a>
+          </li>
+          <li>
+            <a href="register.php">register</a>
+          </li>
+          
+          <li>
+            <a href="contact.html">contact us</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
 
-	</p>
+  <!-- HOME -->
+  <section id="home" class="section jumbotron-section bg--position-center no-repeat bg-cover md-display-table" >
+  <div>
+  
+  
+  
+	  <p>
+		  Table Name:
+		  <select class="form-control" name="optionTables" id="optionTables" >
+			  <option selected value="<?php echo (isset($_SESSION['coltod'])) ? htmlspecialchars($_SESSION['coltod']) : 'None'; ?>" label="..."></option>
+			  <option>cart</option>
+			  <option>college</option>
+			  <option>collegephone</option>
+			  <option>course</option>
+			  <option>department</option>
+			  <option>deptphone</option>
+			  <option>instrphone</option>
+			  <option>instructor</option>
+			  <option>logindetail</option>
+			  <option>section</option>
+			  <option>student</option>
+			  <option>studentphone</option>
+			  <option>takes</option>
+		  </select>
+  
+	  </p>
+  </div>
+	  <div class="div1 container"></div>
+	  <div id="result">
+		  <table id="demo" class=".table-striped">
+			  <thead id="headtable">
+			  </thead>
+			  <tbody>
+			  </tbody>
+		  </table>
+  
+	  </div>
+	  
+	  <div>
+		  <button class="btn btn-primary" id="btnSubmit">Add A New Entry</button>
+	  </div>
+	  <div class="test" id="test"></div>
+</div>
+  </section>
 
-	<div class="div1"></div>
-	<div id="result">
-		<table id="demo" class=".table-striped">
-			<thead id="headtable">
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
+<!-- FOOTER -->
+<footer>
+    <section class="footer-bottom">
+      <div class="container">
+        <hr class="footer-devider">
+        <div class="row">
+          <div class="col-md-5">
+            <p class="copyright">Copyright © 2017 UTD COURSE REGISTRATION</p>
+          </div>
+          <div class="col-md-2">
+            <a id="scroll-top-div" href="" class="pull-right back-top-btn">back to top
+              <span class="btn-icon">
+                <i class="ion-ios-arrow-thin-up"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </footer>
 
-	</div>
-	<div>
-		<br/>
-		
-	</div>
-	<div>
-		<button class="btn btn-primary" id="btnSubmit">Add A New Entry</button>
-	</div>
-	<div class="test" id="test"></div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/main.js"></script>
 	</body>
 
 
