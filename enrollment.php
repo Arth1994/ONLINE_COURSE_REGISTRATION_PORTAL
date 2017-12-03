@@ -6,10 +6,16 @@ session_start();
 <html>
 
 <head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-  	</script> 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
+   
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link href="css/ionicons.min.css" rel="stylesheet">
+  <link href="css/linear-icon.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/owl.carousel.css" rel="stylesheet">
+  <link href="css/owl.theme.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="css/weblysleek-ui-fonts.css">
+  <link rel="stylesheet" href="css/main.css">
     <script>
         
         $(document).ready(function(){
@@ -249,19 +255,6 @@ session_start();
         });
     </script>
     	<style>
-		body {
-			background-color: black;
-			font-family: Georgia, 'Times New Roman', Times, serif;
-			color: white;
-		}
-		select {
-			background-color: white;
-		}
-		button {
-			background-color: white;
-			text-align: center;
-			font-size: 15px;
-		}
 		table,
 		td,
 		th {
@@ -325,18 +318,65 @@ session_start();
 
 <body>
 
-<h2 class="pageheader">Enrollment Page</h2>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="">
+          <img src="images/utd.png" alt="">
+          <span class="text--bold">Admin Page</span>
+        </a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active">
+            <a href="front_end.html">home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <a href="about.html">about</a>
+          </li>
+          <li>
+            <a href="login.php">login</a>
+          </li>
+          <li>
+            <a href="register.php">register</a>
+          </li>
+          
+          <li>
+            <a href="contact.html">contact us</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
 
 
-    <form method='post' id='form' class="form-group" action="addToCart.php">
+<!-- HOME -->
+<section id="home" class="section jumbotron-fluid bg--position-center no-repeat bg-cover md-display-table" >
+  
+  
+    <form method='post' id='form' action="addToCart.php">
         
             
-            <div >
+            <div class="jumbotron-fluid" >
                 Search for Course: <input class="form-control" type="text" id="txtsearch"/>
             </div>
         <br/>
-        <div class="form-inline">
-        <div class="form-group">
+ 
+<div class="form-inline">
+    <div class="form-group">
         <label for="college"> College:</label>
         <select name="college" class="form-control" id="college">
             <option value = ""></option>
@@ -350,41 +390,74 @@ session_start();
                 mysqli_close($con);
             ?>
         </select>
-        </div>
-        
-        <div class="form-group">
+    </div>
+       
+    <div class="form-group">
         <label for="department">Department:</label>
         
         <select name="department" class="form-control" id="department">
             <option value = ""></option>
         </select>
-        </div>
-        <div class="form-group">
+    </div>
+    <div class="form-group">
         <label for="course">Course:</label> 
         <select name="course" class="form-control" id="course">
             <option value = ""></option>
         </select>
-        </div>
+    
+    </div>
         <div class="form-group">
         <label for="section">Section:</label> 
         <select name="section" class="form-control" id="section">
             <option value = ""></option>
         </select>
         </div>
-        </div> 
-        <br/>
+    
+        
        
         
     </form>
+            </div>  
+   <br/>
+    <div>
+    <a class="btn btn-primary" href='cart.php'>Go to Cart</a>
+    </div>
     
-    
+    </section>
+
+    <section>
+    <div class="jumbotron-fluid">
     <table id='results'>
     </table>
+    </div>
 
-    <a class="btn btn-primary" href='cart.php'>Go to Cart</a>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-</body>
+    </section>
+  
+  <!-- FOOTER -->
+  <footer>
+      <section class="footer-bottom">
+        <div class="container">
+          <hr class="footer-devider">
+          <div class="row">
+            <div class="col-md-5">
+              <p class="copyright">Copyright © 2017 UTD COURSE REGISTRATION</p>
+            </div>
+            <div class="col-md-2">
+              <a id="scroll-top-div" href="" class="pull-right back-top-btn">back to top
+                <span class="btn-icon">
+                  <i class="ion-ios-arrow-thin-up"></i>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+  
+      <script src="js/jquery-3.1.0.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/owl.carousel.js"></script>
+      <script src="js/jquery.magnific-popup.min.js"></script>
+      <script src="js/main.js"></script></body>
 
 </html>

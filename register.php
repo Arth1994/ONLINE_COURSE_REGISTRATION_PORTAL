@@ -6,7 +6,15 @@
 	<title>Registration</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<link href="css/ionicons.min.css" rel="stylesheet">
+	<link href="css/linear-icon.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/owl.carousel.css" rel="stylesheet">
+	<link href="css/owl.theme.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/weblysleek-ui-fonts.css">
+	<link rel="stylesheet" href="css/main.css">
 	<meta charset="utf-8">
 	<script>
 	$(document).ready(function(){
@@ -115,7 +123,7 @@
 			$("#id_password").hide();
 		}
 		else {
-			if (pwd.length > 8) {
+			if (pwd.length >= 8) {
 				$("#id_password").removeClass("error");
 				$("#id_password").removeClass("info");
 				$("#id_password").addClass("ok");
@@ -203,44 +211,116 @@
 		</style>
 </head>
 <body>
-	<div class="header">
-		<h2>Register</h2>
-	</div>
-	<form method="post" action="register.php">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="">
+          <img src="images/utd.png" alt="">
+          <span class="text--bold">Register Page</span>
+        </a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active">
+            <a href="front_end.html">home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <a href="about.html">about</a>
+          </li>
+          <li>
+            <a href="login.php">login</a>
+          </li>
+          <li>
+            <a href="register.php">register</a>
+          </li>
+          
+          <li>
+            <a href="contact.html">contact us</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+  <section id="home" class="section jumbotron-fluid bg--position-center no-repeat bg-cover md-display-table" >
+	<div class="container">
+	<form class="form-group" method="post" action="register.php">
 
 		<?php echo display_error(); ?>
 
-		<div class="input-group">
+
+		<div>
 			<label>Username</label>
-			<input type="text" id="username" name="username">
+			<input class="form-control" type="text" id="username" name="username">
 		</div>
-		<div class="input-group">
+		<div>
 			<label>Email</label>
-			<input type="email" id="email" name="email" >
+			<input class="form-control" type="email" id="email" name="email" >
 		</div>
-		<div class="input-group">
+		<div>
 			<label>Password</label>
-			<input type="password" id="password" name="password_1">
+			<input class="form-control" type="password" id="password" name="password_1">
 		</div>
 		
-		<div class="input-group">
+		<div>
 			<label>Confirm password</label>
-			<input type="password" id="password2" name="password_2">
+			<input class="form-control" type="password" id="password2" name="password_2">
 		</div>
-		<div class="input-group">
+		<div>
 		<label>SID</label>
-		<select id="selectSID" name="selectSID">
+		<select class="form-control" id="selectSID" name="selectSID">
 		<option selected>None</option>
 		</select>
 
 		</div>
-		<div class="input-group">
-			<button type="submit" class="btn" id="submit" name="register_btn">Register</button>
+		<br/>
+		<div>
+			<button type="submit" class="btn btn-success" id="submit" name="register_btn">Register</button>
 		</div>
 		<p>
 			Already a member? <a href="login.php">Sign in</a>
 		</p>
 	</form>
-	
+	</div>
+</section>
+
+	<!-- FOOTER -->
+<footer>
+    <section class="footer-bottom">
+      <div class="container">
+        <hr class="footer-devider">
+        <div class="row">
+          <div class="col-md-5">
+            <p class="copyright">Copyright © 2017 UTD COURSE REGISTRATION</p>
+          </div>
+          <div class="col-md-2">
+            <a id="scroll-top-div" href="" class="pull-right back-top-btn">back to top
+              <span class="btn-icon">
+                <i class="ion-ios-arrow-thin-up"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </footer>
+
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/main.js"></script>	
 </body>
 </html>
